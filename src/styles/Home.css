@@ -1,0 +1,41 @@
+/* MAIN BANNER WRAPPER */
+.main-banner {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* BANNER IMAGE */
+.main-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* covers container */
+  object-position: center;
+  display: block;
+  filter: brightness(100%);
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+  .main-banner {
+    height: 60vh; /* smaller for tablet */
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .main-banner {
+    height: 45vh; /* smaller for mobile */
+  }
+}
+
+
+html[lang="ur"] .hero-text h2 {
+  font-size: 4.2rem;
+}
+
+html[lang="ur"] .hero-text p {
+  font-size: 3.2rem;
+  line-height: 2.2;
+}

@@ -1,0 +1,117 @@
+/* ==========================
+   HERO SECTION
+=========================== */
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #c6e7ca;
+  padding: 2rem 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* LEFT TEXT */
+.hero-text {
+  flex: 1;
+  color: #080808;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.hero-text h5 {
+  font-size: 1.25rem;
+  color: #494747;
+  line-height: 1.6;
+  margin-bottom: 0.7rem;
+}
+
+/* RIGHT IMAGE SLIDER */
+.hero-carousel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 420px;
+  overflow: hidden;
+}
+
+.hero-carousel img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeSlide 1s ease-in-out;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+=========================== */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-text h5 {
+    font-size: 1.1rem;
+  }
+
+  .hero-carousel {
+    height: 350px;
+  }
+}
+
+/* MOBILE — KEEP TEXT FIRST, IMAGE SECOND */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;    /* Keep natural order: text first, image second */
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .hero-text h5 {
+    font-size: 1rem;
+  }
+
+  .hero-carousel {
+    height: 300px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero-carousel img {
+    max-width: 380px;
+  }
+}
+
+/* Fade Animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}

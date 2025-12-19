@@ -1,0 +1,173 @@
+{
+  "Home": "Home",
+  "About": "About",
+  "Products": "Products",
+  "Contact": "Contact",
+  "Career": "Career",
+
+  "heroTitle1": "Sooraj Crop Sciences",
+  "heroDesc": "Growing a better future for farmers",
+
+  "videoTitle": "Our Process",
+  "footerText": "All Rights Reserved",
+
+  "search": "Search products...",
+
+  "heroTitle": "Welcome to Sooraj Crop Science",
+
+  "heroPara1": "At Sooraj Crop Science, we are dedicated to delivering high-quality crop protection and nutrition solutions to farmers across Pakistan. As a trusted supplier of fungicides, insecticides, and micronutrients, we provide advanced and sustainable methods to ensure the health and productivity of crops from planting to harvest.",
+
+  "heroPara2": "Crops face constant threats from insects, fungi, and nutrient imbalances, as well as unpredictable weather conditions such as heat, cold, drought, and floods. We partner with farmers to tackle these challenges, ensuring safe, nutritious, and high-quality produce.",
+  "videoHeading": "Latest Videos from Sooraj Crops",
+  "visitChannel": "Visit Channel",
+
+  "video1Title": "Sooraj Crop Sciences – Official Documentary",
+  "video2Title": "Farmer Training Session – 2025",
+  "video3Title": "Product Demo – Crop Booster Technology",
+
+  "stats": {
+    "title": "Our Growth in Numbers",
+    "members": "Active Employee",
+    "projects": "Projects Completed",
+    "clients": "Happy Clients",
+    "awards": "Awards Won"
+  },
+
+  "products": {
+    "featured": "Featured Products",
+    "viewAll": "View All Products",
+    "moreDetails": "More Details",
+    "hideDetails": "Hide Details"
+  },
+
+  "productsPage": {
+    "title": "Our Products"
+  },
+
+  "product": {
+    "notFound": "Product not found",
+    "back": "Back to Products",
+    "brand": "Brand",
+    "pack": "Pack Size",
+    "composition": "Composition / Ingredients",
+    "crops": "Crops / Targeted Plants",
+    "usage": "Usage Instructions",
+    "season": "Season / Timing",
+    "problems": "Pest / Problem Control",
+    "title": "Our Products",
+    "readMore": "Read more",
+    "hideDetails": "Hide Details"
+  },
+
+  "about": {
+    "heroTitle": "About Our Company",
+    "whoTitle": "Who We Are",
+    "whoDesc": "Sooraj Crop Sciences is an agricultural solutions company dedicated to delivering reliable, research-driven products that empower farmers to achieve healthier crops, stronger yields, and long-term sustainability.",
+
+    "missionTitle": "Our Mission",
+    "missionDesc": "To provide innovative and effective agricultural solutions that improve crop health and maximize yield.",
+
+    "visionTitle": "Our Vision",
+    "visionDesc": "To become a trusted leader in crop sciences by offering science-backed products.",
+
+    "commitmentTitle": "Our Commitment",
+    "commitmentDesc": "We are committed to delivering high-quality, environment-friendly crop solutions that farmers trust.",
+
+    "stats": {
+      "exp": "Years of Experience",
+      "products": "Premium Products",
+      "dealers": "Dealers Nationwide",
+      "farmers": "Farmers Served"
+    },
+
+    "whyTitle": "Why Farmers Trust Sooraj Crop Sciences",
+    "why1": "Scientific research-based formulations",
+    "why2": "Complete crop protection & nutrition",
+    "why3": "Reliable products trusted by farmers",
+    "why4": "Dealer network across agricultural regions",
+    "why5": "Focus on sustainable modern farming"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "sendMessage": "Send Us a Message",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "location": "Our Office Location",
+    "thankYou": "Thank you, {{name}}! Your message has been sent.",
+    "emailLabel": "Email Address",
+  "whatsapp": "WhatsApp Support",
+  "phone": "Contact Number",
+  "office": "Office Location",
+  "address": "Apartment 01, Floor 02, Almeezan Arcade, 24-CCA, Khayaban-e-Ameen, Lahore 54770",
+  "hours": "Business Hours",
+  "timing": "Monday to Friday — 9:00 AM to 6:00 PM",
+  "chatNow" :"Chat Now",
+  "infoTitle" : "Contact Now"
+  },
+  "career": {
+    "heroTitle": "Be part of our mission",
+    "heroText": "At Sooraj Crop Sciences, we empower farmers with innovation. Join our mission to improve agriculture with sustainable crop solutions.",
+
+    "apply": "Apply",
+
+    "tags": {
+      "all": "View all",
+      "agriculture": "Agriculture",
+      "field": "Field Operations",
+      "research": "Research",
+      "crop": "Crop Science",
+      "production": "Production",
+      "management": "Management"
+    },
+
+    "jobs": {
+      "1": {
+        "title": "Field Agronomist",
+        "desc": "We’re looking for an agronomist to support farmers with crop guidance and field visits.",
+        "type1": "On-field",
+        "type2": "Full-time"
+      },
+      "2": {
+        "title": "Crop Protection Specialist",
+        "desc": "Help farmers diagnose crop diseases and recommend biological & chemical solutions.",
+        "type1": "On-field",
+        "type2": "Full-time"
+      },
+      "3": {
+        "title": "Farm Outreach Coordinator",
+        "desc": "Connect with farmers, organize events, and spread awareness about our products.",
+        "type1": "Hybrid",
+        "type2": "Full-time"
+      }
+    }
+  },
+  "cropGallery": {
+    "title": "Crops That We Protect",
+    "subtitle": "Our specialized solutions safeguard a variety of essential crops."
+  },
+  "footer": {
+    "brand": "Sooraj Crop Sciences",
+    "address": "Apartment 01 Floor 02 Almeezan Arcade 24-CCA, Khayaban-e-Ameen, Lahore 54770",
+    "phone": "04235111003",
+    "email": "info@soorajcropsciences.com",
+    "quickLinks": "Quick Links",
+    "categories": "Categories",
+    "findUs": "Find Us",
+    "copyright": "Sooraj Crop Sciences — All Rights Reserved"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "productPage": "Products",
+    "contact": "Contact",
+    "career": "Career"
+  },
+  "categories": {
+    "all": "All",
+    "fungicide": "Fungicide",
+    "insecticide": "Insecticide",
+    "micronutrients": "Micronutrients"
+  }
+}

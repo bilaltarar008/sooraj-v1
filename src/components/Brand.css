@@ -1,0 +1,56 @@
+.brand-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 30px 0;
+}
+
+/* Prevent shrinking when many logos exist */
+.brand-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bigger logos */
+.brand-item img {
+  height: 90px; /* increased size */
+  width: auto;
+  object-fit: contain;
+  filter: saturate(1.1);
+  transition: transform 0.3s ease;
+}
+
+.brand-item img:hover {
+  transform: scale(1.1);
+}
+
+/* The magic: 200% width track ensures infinite loop */
+.marquee-track {
+  display: flex;
+  gap: 70px;
+  width: max-content;
+  animation: marqueeScroll 20s linear infinite;
+  will-change: transform;
+}
+
+/* Perfect infinite loop */
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .brand-item img {
+    height: 65px;
+  }
+  .marquee-track {
+    gap: 45px;
+  }
+}

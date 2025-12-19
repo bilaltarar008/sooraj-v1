@@ -1,0 +1,86 @@
+@font-face {
+  font-family: "Jameel Noori Nastaleeq";
+  src: url("../assets/fonts/JameelNooriNastaleeq.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ===============================
+   URDU FONT (FORCED & CONTROLLED)
+   =============================== */
+
+.urdu-font,
+.urdu-font * {
+  font-family: "Jameel Noori Nastaleeq", serif !important;
+}
+
+/* Slight size boost only */
+.urdu-font {
+  font-size: 1.04rem;
+  line-height: 2.1;
+}
+
+/* Headings – modest, professional */
+.urdu-font h1 {
+  font-size: 2.2rem;
+}
+
+.urdu-font h2 {
+  font-size: 1.85rem;
+}
+
+.urdu-font h3 {
+  font-size: 1.55rem;
+}
+
+.urdu-font p,
+.urdu-font li,
+.urdu-font span {
+  font-size: 1em;
+}
+
+@font-face {
+  font-family: "Jameel Noori Nastaleeq";
+  src: url("../assets/fonts/JameelNooriNastaleeq.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ===============================
+   URDU FONT (FORCED & CONTROLLED)
+   =============================== */
+
+.urdu-font,
+.urdu-font * {
+  font-family: "Jameel Noori Nastaleeq", serif !important;
+}
+
+/* Slight size boost only */
+.urdu-font {
+  font-size: 1.04rem;
+  line-height: 2.1;
+}
+
+/* Headings – modest, professional */
+.urdu-font h1 {
+  font-size:1.5rem;
+}
+
+.urdu-font h2 {
+  font-size: 2.85rem;
+}
+
+.urdu-font h3 {
+  font-size: 2rem;
+}
+
+.urdu-font p,
+.urdu-font li,
+.urdu-font span {
+  font-size: 1em;
+}
+
+html[lang="ur"] [style*="font-size: 3rem"] {
+  font-size: 1.15rem !important;
+}
+

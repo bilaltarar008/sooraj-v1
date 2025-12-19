@@ -1,0 +1,298 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+.navbar {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+  position: sticky;   /* stays below TopHeader and then sticks when scrolled */
+  top: 0;
+  z-index: 1000;
+}
+
+/* container keeps navbar in normal flow so TopHeader sits above naturally */
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  gap: 16px;
+}
+
+/* =========================
+   LOGO
+========================= */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-title {
+  color: #127a3a;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* =========================
+   NAV LINKS (DESKTOP)
+========================= */
+.nav-links {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f6b33;
+  padding: 6px 4px;
+  transition: color .18s ease, border-bottom .18s ease;
+}
+
+.nav-link:hover {
+  color: #0f5326;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid #127a3a;
+  padding-bottom: 3px;
+}
+
+/* =========================
+   SEARCH (DESKTOP)
+========================= */
+.nav-search {
+  display: flex;
+  align-items: center;
+  margin-left: 18px;
+  position: relative; /* parent for absolutely positioned panel */
+}
+
+/* circular icon */
+.search-icon {
+  background: #127a3a;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+/* input collapsed by default; expands when `.open` added */
+.search-input {
+  width: 0;
+  opacity: 0;
+  padding: 0;
+  margin-left: 10px;
+  border-radius: 8px;
+  border: none;
+  transition: width .28s ease, opacity .2s ease, padding .2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+.search-input.open {
+  width: 260px;
+  opacity: 1;
+  padding: 8px 12px;
+  border: 1px solid #e6e6e6;
+}
+
+/* =========================
+   SEARCH RESULTS PANEL
+   absolutely positioned so it doesn't resize the navbar
+========================= */
+.search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 340px;
+  max-height: 300px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(14, 40, 20, 0.08);
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 1200;
+  animation: fadeIn .18s ease;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* each result */
+.search-result-item {
+  display: block;
+  padding: 12px 14px;
+  color: #0f5924;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background .12s ease, color .12s ease;
+}
+
+.search-result-item:hover {
+  background: #127a3a;
+  color: #fff;
+}
+
+.search-result-sub {
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  margin-left: 6px;
+}
+
+/* =========================
+   HAMBURGER & MOBILE
+========================= */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  color: #127a3a;
+}
+
+/* language toggles */
+.desktop-lang {
+  margin-left: 12px;
+}
+
+/* mobile internal search & language */
+.mobile-search {
+  display: none;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+  .hamburger { display: block; order: 3; }
+  .nav-links { display: none; }
+
+  .nav-links.nav-open {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    padding: 18px 12px;
+    position: absolute;
+    top: 74px; /* appears below the sticky navbar */
+    left: 0;
+    text-align: center;
+    gap: 14px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    z-index: 1100;
+  }
+  /* =========================
+   MOBILE RIGHT CONTROLS (EN/UR + Hamburger)
+========================= */
+.mobile-right-controls {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;   /* ✅ PUSHES IT TO FAR RIGHT */
+}
+
+
+  .mobile-search { display: block; padding: 0 14px; }
+  .mobile-search input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
+  }
+
+  .mobile-lang { display: flex; justify-content: center; margin-top: 8px; }
+
+  /* hide desktop search on small screens */
+  .nav-search { display: none; }
+  .desktop-lang { display: none; }
+}
+/* =========================
+   MOBILE LEFT CONTROLS (Hamburger + Language)
+========================= */
+
+
+
+
+/* =========================
+   Small phones
+========================= */
+@media (max-width: 480px) {
+  .nav-title { display: none; }
+  .nav-logo { height: 48px; }
+  .search-results { right: 8px; left: 8px; width: auto; }
+}
+
+/* layout helpers */
+* { box-sizing: border-box; }
+
+body, html { margin: 0; padding: 0; }
+
+/* =========================
+   MOBILE TOP BAR CONTROLS
+   (Language + Hamburger)
+========================= */
+.mobile-left-controls {
+  display: none;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto; /* Push to the far right */
+}
+
+@media (max-width: 1100px) {
+
+  /* Show mobile controls */
+  .mobile-left-controls {
+    display: flex;
+  }
+
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: block;
+    font-size: 22px;
+    color: #127a3a;
+    cursor: pointer;
+  }
+
+  /* Hide desktop search + desktop language */
+  .nav-search {
+    display: none;
+  }
+
+  .desktop-lang {
+    display: none;
+  }
+
+  /* Hide desktop nav links until opened */
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links.nav-open {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    width: 100%;
+    padding: 18px 12px;
+    gap: 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  }
+}
+

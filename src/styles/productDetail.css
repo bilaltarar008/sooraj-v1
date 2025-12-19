@@ -1,0 +1,112 @@
+/* MAIN CONTAINER */
+.pd-main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  font-family: "Poppins", sans-serif;
+  color: #1a4d2e;
+}
+
+/* BACK BUTTON */
+.pd-back {
+  background: none;
+  border: none;
+  color: #127a3a;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.pd-back:hover {
+  text-decoration: underline;
+}
+
+/* TOP SECTION */
+.pd-top-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.pd-image-wrapper {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.pd-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pd-info-wrapper {
+  flex: 2 1 400px;
+}
+
+.pd-title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.pd-basic-info p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+/* SECTION CARDS */
+.pd-section-card {
+  background: #f7fdf7;
+  padding: 12px 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pd-section-card h3 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #127a3a;
+}
+
+.pd-section-card p,
+.pd-section-card ul {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.pd-section-card ul li {
+  margin-bottom: 5px;
+}
+
+/* GREEN SECTION */
+.pd-green-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* SUPPLIER LOGO STRIP */
+.pd-logo-strip {
+  overflow-x: auto;
+  padding: 10px 0;
+  background: #f1fdf1;
+  border-radius: 12px;
+}
+
+.pd-logo-track {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.pd-logo-track img {
+  height: 60px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
