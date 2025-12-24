@@ -66,7 +66,7 @@ export default function TopHeader() {
           </button>
           <button
             style={iconButtonStyle}
-            onClick={() => window.open("https://instagram.com", "_blank")}
+            onClick={() => window.open("https://instagram.com/soorajcropsciences", "_blank")}
           >
             <FaInstagram size={16} />
           </button>
