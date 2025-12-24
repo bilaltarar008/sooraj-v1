@@ -47,45 +47,45 @@
   "product": {
     "notFound": "Product not found",
     "back": "Back to Products",
-    "brand": "Brand",
     "pack": "Pack Size",
     "composition": "Composition / Ingredients",
     "crops": "Crops / Targeted Plants",
     "usage": "Usage Instructions",
     "season": "Season / Timing",
     "problems": "Pest / Problem Control",
+    "category": "Category",
+    "ourSuppliers": "Our Suppliers",
     "title": "Our Products",
     "readMore": "Read more",
     "hideDetails": "Hide Details"
   },
-
   "about": {
-    "heroTitle": "About Our Company",
     "whoTitle": "Who We Are",
-    "whoDesc": "Sooraj Crop Sciences is an agricultural solutions company dedicated to delivering reliable, research-driven products that empower farmers to achieve healthier crops, stronger yields, and long-term sustainability.",
+    "whoPara1": "Sooraj Crop Sciences is a modern agricultural enterprise committed to empowering farmers across Pakistan through innovation, science, and trusted partnerships.",
+    "whoPara2": "We deliver globally sourced crop solutions, expert field advisory, and dealer-focused support systems that enhance productivity, protect yields, and promote sustainable farming practices.",
+    "whoTagline": "Rooted in trust. Driven by innovation. Focused on farmers.",
 
     "missionTitle": "Our Mission",
-    "missionDesc": "To provide innovative and effective agricultural solutions that improve crop health and maximize yield.",
+    "missionDesc": "To deliver innovative, globally sourced crop solutions backed by expert advisory, digital tools, and farmer education—enhancing productivity, profitability, and sustainability.",
 
     "visionTitle": "Our Vision",
-    "visionDesc": "To become a trusted leader in crop sciences by offering science-backed products.",
+    "visionDesc": "To transform Pakistan’s agriculture through a unified digital-agri ecosystem that improves yields, strengthens food security, and drives long-term rural prosperity.",
 
-    "commitmentTitle": "Our Commitment",
-    "commitmentDesc": "We are committed to delivering high-quality, environment-friendly crop solutions that farmers trust.",
+    "servicesTitle": "The Services We Provide",
 
-    "stats": {
-      "exp": "Years of Experience",
-      "products": "Premium Products",
-      "dealers": "Dealers Nationwide",
-      "farmers": "Farmers Served"
-    },
+    "dealerMapTitle": "Where Our Dealers Are Located",
+    "contactDealer": "Contact this dealer",
 
-    "whyTitle": "Why Farmers Trust Sooraj Crop Sciences",
-    "why1": "Scientific research-based formulations",
-    "why2": "Complete crop protection & nutrition",
-    "why3": "Reliable products trusted by farmers",
-    "why4": "Dealer network across agricultural regions",
-    "why5": "Focus on sustainable modern farming"
+    "dealerCtaTitle": "Want to Become a Dealer?",
+    "dealerCtaDesc": "Join our growing nationwide dealer network and partner with a company committed to quality, innovation, and long-term success.",
+    "dealerCtaBtn": "Become a Dealer"
+  },
+
+  "services": {
+    "productsLabel": "Products",
+    "fieldAdvisory": "Field Advisory Services",
+    "dealerConsultancy": "Dealer Business Consultancy",
+    "householdSolutions": "Household Solutions"
   },
   "contact": {
     "title": "Contact Us",
@@ -97,14 +97,14 @@
     "location": "Our Office Location",
     "thankYou": "Thank you, {{name}}! Your message has been sent.",
     "emailLabel": "Email Address",
-  "whatsapp": "WhatsApp Support",
-  "phone": "Contact Number",
-  "office": "Office Location",
-  "address": "Apartment 01, Floor 02, Almeezan Arcade, 24-CCA, Khayaban-e-Ameen, Lahore 54770",
-  "hours": "Business Hours",
-  "timing": "Monday to Friday — 9:00 AM to 6:00 PM",
-  "chatNow" :"Chat Now",
-  "infoTitle" : "Contact Now"
+    "whatsapp": "WhatsApp Support",
+    "phone": "Contact Number",
+    "office": "Office Location",
+    "address": "Apartment 01, Floor 02, Almeezan Arcade, 24-CCA, Khayaban-e-Ameen, Lahore 54770",
+    "hours": "Business Hours",
+    "timing": "Monday to Friday — 9:00 AM to 6:00 PM",
+    "chatNow": "Chat Now",
+    "infoTitle": "Contact Now"
   },
   "career": {
     "heroTitle": "Be part of our mission",
