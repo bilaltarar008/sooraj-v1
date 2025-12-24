@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import aboutBanner from "../assets/aboutbanner.jpg";
 import aboutSideImage from "../assets/main-banner2.jpg";
-
 /* Fix leaflet marker icons */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -20,49 +20,38 @@ L.Icon.Default.mergeOptions({
 
 export default function About() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const items = document.querySelectorAll(
       ".fade-up, .slide-left, .slide-right"
     );
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) entry.target.classList.add("show");
         });
       },
       { threshold: 0.15 }
     );
-    items.forEach(el => observer.observe(el));
+    items.forEach((el) => observer.observe(el));
   }, []);
 
   return (
     <div style={{ fontFamily: "Inter, sans-serif", color: "#1f2937" }}>
       {/* ================= HERO ================= */}
-     
-<section
-  style={{
-    width: "100%",
-    height: "85vh",
-    overflow: "hidden",
-  }}
->
-  <img
-    src={aboutBanner}
-    alt="Sooraj Crop Sciences"
-    loading="eager"
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      objectPosition: "center",
-      display: "block",
-      filter: "contrast(1.05) saturate(1.1)",
-    }}
-  />
-</section>
-
-
+      <section style={{ height: "80vh", overflow: "hidden" }}>
+        <img
+          src={aboutBanner}
+          alt="Sooraj Crop Sciences"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center top",
+          }}
+        />
+      </section>
 
       {/* ================= WHO WE ARE ================= */}
       <section style={{ padding: "80px 10% 50px" }}>
@@ -75,24 +64,22 @@ export default function About() {
           }}
         >
           <div className="slide-left">
-            <h2 style={{ color: "#127a3a", fontSize: "2.4rem", marginBottom: 22 }}>
-              Who We Are
+            <h2
+              style={{ color: "#127a3a", fontSize: "2.4rem", marginBottom: 22 }}
+            >
+              {t("about.whoTitle")}
             </h2>
 
             <p style={{ lineHeight: 1.9, marginBottom: 14 }}>
-              Sooraj Crop Sciences is a modern agricultural enterprise committed
-              to empowering farmers across Pakistan through innovation, science,
-              and trusted partnerships.
+              {t("about.whoPara1")}
             </p>
 
             <p style={{ lineHeight: 1.9, marginBottom: 18 }}>
-              We deliver globally sourced crop solutions, expert field advisory,
-              and dealer-focused support systems that enhance productivity,
-              protect yields, and promote sustainable farming practices.
+              {t("about.whoPara2")}
             </p>
 
             <p style={{ fontWeight: 600, color: "#127a3a" }}>
-              Rooted in trust. Driven by innovation. Focused on farmers.
+              {t("about.whoTagline")}
             </p>
           </div>
 
@@ -124,13 +111,10 @@ export default function About() {
           }}
         >
           <h2 style={{ color: "#127a3a", fontSize: "2rem", marginBottom: 14 }}>
-            Our Mission
+            {t("about.missionTitle")}
           </h2>
-          <p style={{ lineHeight: 1.8 }}>
-            To deliver innovative, globally sourced crop solutions backed by
-            expert advisory, digital tools, and farmer education—enhancing
-            productivity, profitability, and sustainability.
-          </p>
+
+          <p style={{ lineHeight: 1.8 }}>{t("about.missionDesc")}</p>
         </div>
 
         <div
@@ -144,19 +128,18 @@ export default function About() {
             marginLeft: "auto",
           }}
         >
-          <h2 style={{ fontSize: "2rem", marginBottom: 14 }}>Our Vision</h2>
-          <p style={{ lineHeight: 1.75 }}>
-            To transform Pakistan’s agriculture through a unified digital-agri
-            ecosystem that improves yields, strengthens food security, and drives
-            long-term rural prosperity.
-          </p>
+          <h2 style={{ fontSize: "2rem", marginBottom: 14 }}>
+            {t("about.visionTitle")}
+          </h2>
+
+          <p style={{ lineHeight: 1.75 }}>{t("about.visionDesc")}</p>
         </div>
       </section>
 
       {/* ================= SERVICES ================= */}
       <section style={{ padding: "80px 10%", textAlign: "center" }}>
         <h2 style={{ color: "#10582a", fontSize: "2.3rem", marginBottom: 50 }}>
-          The Services We Provide
+          {t("about.servicesTitle")}
         </h2>
 
         <div
@@ -169,7 +152,7 @@ export default function About() {
           {services.map((s, i) => (
             <div key={i} className="service-box fade-up">
               {s.icon}
-              <h4>{s.title}</h4>
+              <h4>{t(s.titleKey)}</h4>
             </div>
           ))}
         </div>
@@ -185,11 +168,15 @@ export default function About() {
             marginBottom: 30,
           }}
         >
-          Where Our Dealers Are Located
+          {t("about.dealerMapTitle")}
         </h2>
 
         <div style={{ height: 420, borderRadius: 18, overflow: "hidden" }}>
-          <MapContainer center={[30.3753, 69.3451]} zoom={6} style={{ height: "100%" }}>
+          <MapContainer
+            center={[30.3753, 69.3451]}
+            zoom={6}
+            style={{ height: "100%" }}
+          >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
             {dealers.map((d, i) => (
@@ -201,7 +188,7 @@ export default function About() {
                     style={{ color: "#127a3a", cursor: "pointer" }}
                     onClick={() => navigate("/contact")}
                   >
-                    Contact this dealer
+                    {t("about.contactDealer")}
                   </span>
                 </Popup>
               </Marker>
@@ -219,12 +206,13 @@ export default function About() {
         }}
       >
         <h2 style={{ fontSize: "2rem", marginBottom: 12, color: "#127a3a" }}>
-          Want to Become a Dealer?
+          {t("about.dealerCtaTitle")}
         </h2>
+
         <p style={{ maxWidth: 600, margin: "0 auto 20px", lineHeight: 1.6 }}>
-          Join our growing nationwide dealer network and partner with a company
-          committed to quality, innovation, and long-term success.
+          {t("about.dealerCtaDesc")}
         </p>
+
         <button
           onClick={() => navigate("/contact")}
           style={{
@@ -237,7 +225,7 @@ export default function About() {
             cursor: "pointer",
           }}
         >
-          Become a Dealer
+          {t("about.dealerCtaBtn")}
         </button>
       </section>
 
@@ -297,7 +285,7 @@ export default function About() {
 /* ================= DATA ================= */
 const services = [
   {
-    title: "Products",
+    titleKey: "services.productsLabel",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M12 2l4 4-4 4-4-4z" />
@@ -307,7 +295,7 @@ const services = [
     ),
   },
   {
-    title: "Field Advisory Services",
+    titleKey: "services.fieldAdvisory",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M3 12h18" />
@@ -316,7 +304,7 @@ const services = [
     ),
   },
   {
-    title: "Dealer Business Consultancy",
+    titleKey: "services.dealerConsultancy",
     icon: (
       <svg viewBox="0 0 24 24">
         <rect x="3" y="4" width="18" height="14" rx="2" />
@@ -325,7 +313,7 @@ const services = [
     ),
   },
   {
-    title: "Household Solutions",
+    titleKey: "services.householdSolutions",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M3 12l9-9 9 9" />
