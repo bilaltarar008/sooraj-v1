@@ -45,11 +45,32 @@ const CropGallery = () => {
               ✕
             </button>
 
-            <img
-              src={selectedCrop.image}
-              alt={selectedCrop.name}
-              className="popup-img"
-            />
+            {/* POPUP */}
+{selectedCrop && (
+  <div className="popup-overlay" onClick={() => setSelectedCrop(null)}>
+    <div
+      className="popup-box"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="close-btn"
+        onClick={() => setSelectedCrop(null)}
+      >
+        ✕
+      </button>
+
+      <img
+        src={selectedCrop.popupImage ? selectedCrop.popupImage : selectedCrop.image}
+        alt={selectedCrop.name}
+        className="popup-img"
+      />
+
+      <h2 className="popup-title">{selectedCrop.name}</h2>
+      <p className="popup-desc">{selectedCrop.description}</p>
+    </div>
+  </div>
+)}
+
 
             <h2 className="popup-title">{selectedCrop.name}</h2>
             <p className="popup-desc">{selectedCrop.description}</p>

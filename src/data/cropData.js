@@ -1,21 +1,16 @@
 // src/data/cropData.js
-import cotton from "../assets/crops/cotton.jpg";
 import rice from "../assets/crops/rice.jpg";
 import wheat from "../assets/crops/wheat.jpg";
 import maize from "../assets/crops/maize.jpg";
 import potato from "../assets/crops/potato.jpg";
 import WaterMelon from "../assets/crops/WaterMelon.jpg"
 import Strawberry from "../assets/crops/Strawberry.jpg"
+import wheatPopup from "../assets/crops/wheat-popup.jpg"
 import Citrus from "../assets/crops/Citrus.jpg"
 import Vegetables from "../assets/crops/Vegetables.jpg"
 
 export const crops = [
-  // {
-  //   id: 1,
-  //   name: "Cotton",
-  //   image: cotton,
-  //   description: "Cotton is widely used in textiles."
-  // },
+
   {
     id: 2,
     name: "Rice",
@@ -23,11 +18,13 @@ export const crops = [
     description: "Rice feeds more than half the world."
   },
   {
-    id: 3,
-    name: "Wheat",
-    image: wheat,
-    description: "Wheat is used for bread, pasta, etc."
+        id: 3,
+        name: "Wheat",
+        image: wheat,
+        popupImage: wheatPopup,
+        description: "Wheat is useds for bread, pasta, etc."
   },
+
   {
     id: 4,
     name: "Maize",
