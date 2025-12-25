@@ -5,7 +5,7 @@ import maize from "../assets/crops/maize.jpg";
 import potato from "../assets/crops/potato.jpg";
 import WaterMelon from "../assets/crops/WaterMelon.jpg"
 import Strawberry from "../assets/crops/Strawberry.jpg"
-import wheatPopup from "../assets/crops/wheat-popup.jpg"
+import wheatPopup from "../assets/main-banner.jpg"
 import Citrus from "../assets/crops/Citrus.jpg"
 import Vegetables from "../assets/crops/Vegetables.jpg"
 
