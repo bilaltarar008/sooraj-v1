@@ -44,19 +44,20 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* PRODUCTS */}
-        <div className="footer-col">
-          <h4>{t("footer.products")}</h4>
-          <ul>
-            <li>{t("footer.all")}</li>
-            <li>{t("footer.fungicide")}</li>
-            <li>{t("footer.insecticide")}</li>
-            <li>{t("footer.herbicide")}</li>
-            <li>{t("footer.micronutrient")}</li>
-            <li>{t("footer.fertilizer")}</li>
-            <li>{t("footer.granule")}</li>
-          </ul>
-        </div>
+      {/* PRODUCTS */}
+<div className="footer-col">
+  <h4>{t("footer.products")}</h4>
+  <ul>
+    <li><Link to="/products">{t("footer.all")}</Link></li>
+    <li><Link to="/products">{t("footer.fungicide")}</Link></li>
+    <li><Link to="/products">{t("footer.insecticide")}</Link></li>
+    <li><Link to="/products">{t("footer.herbicide")}</Link></li>
+    <li><Link to="/products">{t("footer.micronutrient")}</Link></li>
+    <li><Link to="/products">{t("footer.fertilizer")}</Link></li>
+    <li><Link to="/products">{t("footer.granule")}</Link></li>
+  </ul>
+</div>
+
 
         {/* CONTACT + MAP */}
         <div className="footer-col contact">
