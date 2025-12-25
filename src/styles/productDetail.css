@@ -9,9 +9,9 @@
 
 /* BACK BUTTON */
 .pd-back {
-  background: none;
+  background: #1a4d2e;
   border: none;
-  color: #127a3a;
+  color: white;
   font-size: 0.95rem;
   margin-bottom: 15px;
   cursor: pointer;
@@ -58,7 +58,7 @@
 
 /* SECTION CARDS */
 .pd-section-card {
-  background: #f7fdf7;
+  background: #e4ffe0;
   padding: 12px 15px;
   margin-top: 15px;
   border-radius: 10px;
@@ -109,4 +109,52 @@
   border-radius: 8px;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.pd-suppliers-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.pd-suppliers-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #127a3a;
+}
+
+/* =========================
+   URDU LANGUAGE OVERRIDES
+   ========================= */
+
+/* BIGGER URDU TEXT */
+.urdu-text {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Product title */
+.urdu-text .pd-title {
+  font-size: 2.7rem;
+  line-height: 1.3;
+}
+
+/* Paragraphs & lists */
+.urdu-text .pd-basic-info p,
+.urdu-text .pd-section-card p,
+.urdu-text .pd-section-card li {
+  font-size: 1.3rem;
+  line-height: 2;
+}
+
+/* Section headings */
+.urdu-text .pd-section-card h3 {
+  font-size: 1.65rem;
+  line-height: 1.6;
+}
+
+/* Suppliers heading */
+.urdu-text.pd-suppliers-heading {
+  font-size: 2.2rem;
+  text-align: center; /* ✅ center align in Urdu */
 }
