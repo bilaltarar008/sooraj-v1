@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 import {
   BrowserRouter as Router,
   Routes,
@@ -95,6 +96,9 @@ export default function App() {
     <Router>
       {/* ✅ Apply Urdu font if needed */}
       <div className={isUrdu ? "urdu-font" : ""}>
+
+      <ScrollToTop />
+
         <TopHeader />
 
         <Navbar

@@ -149,14 +149,23 @@
   },
   "footer": {
     "brand": "Sooraj Crop Sciences",
-    "address": "Apartment 01 Floor 02 Almeezan Arcade 24-CCA, Khayaban-e-Ameen, Lahore 54770",
-    "phone": "04235111003",
-    "email": "info@soorajcropsciences.com",
+    "tagline": "At Sooraj Crop Science, we are dedicated to delivering high-quality crop protection and nutrition solutions to farmers across Pakistan. ",
     "quickLinks": "Quick Links",
-    "categories": "Categories",
-    "findUs": "Find Us",
-    "copyright": "Sooraj Crop Sciences — All Rights Reserved"
+    "products": "Products",
+    "contact": "Contact",
+    "phone": "+92 42 35111003",
+    "email": "sales@soorajcropsciences.com",
+    "location": "Apartment 01 Floor 02 Almeezan Arcade 24-CCA, Khayaban E Ameen, Lahore, 54770, Pakistan",
+    "copyright": "Sooraj Crop Sciences. All rights reserved.",
+    "all": "All Products",
+    "fungicide": "Fungicides",
+    "insecticide": "Insecticides",
+    "herbicide": "Herbicides",
+    "micronutrient": "Micronutrients",
+    "fertilizer": "Fertilizers",
+    "granule": "Granules"
   },
+
   "nav": {
     "home": "Home",
     "about": "About",
