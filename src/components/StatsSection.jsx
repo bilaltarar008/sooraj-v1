@@ -136,7 +136,7 @@ export default function StatsSection() {
       style={{
         padding: "38px 0", // ✅ slightly bigger but still tight
         background: "#f4fff7",
-        direction: isUrdu ? "rtl" : "ltr",
+        direction: "ltr",
       }}
     >
       <h1
