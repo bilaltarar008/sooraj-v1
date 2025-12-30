@@ -58,8 +58,10 @@
 }
 
 .crop-card:hover .crop-image {
-  transform: scale(1.06);
+  transform: scale(1.08);
+  filter: brightness(1.05);
 }
+
 
 .crop-name {
   position: absolute;
@@ -119,12 +121,66 @@
 .popup-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  background: rgba(140, 140, 140, 0.662);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3000;
+  z-index: 9999;
+  padding: 12px;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.popup-img-full.zoomed {
+  transform: scale(2);
+  cursor: zoom-out;
+}
+
+.popup-box.image-only {
+  position: relative;
+  width: auto;
+  max-width: 95vw;
+  max-height: 95vh;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: zoomFade 0.25s ease;
+  padding: 12px;
+  max-width: 92vw;
+  max-height: 90vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.popup-img-full {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  transition: transform 0.35s ease;
+  touch-action: pinch-zoom;
+  cursor: zoom-in;
+}
+
+@media (hover: hover) {
+  .popup-img-full:hover {
+    transform: scale(1.03);
+    transition: transform 0.25s ease;
+  }
+}
+
 
 .popup-box {
   width: 92%;
@@ -163,14 +219,32 @@
 }
 
 .close-btn {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: #e0e0e0;
-  border: none;
-  font-size: 1rem;
-  font-weight: 800;
-  padding: 4px 9px;
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  border: none;
+  background: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
+  z-index: 10000;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+@keyframes zoomFade {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

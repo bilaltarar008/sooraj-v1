@@ -1,5 +1,5 @@
 // src/components/CropGallery.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { crops } from "../data/cropData";
 import "./CropGallery.css";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,28 @@ import { useTranslation } from "react-i18next";
 const CropGallery = () => {
   const [selectedCrop, setSelectedCrop] = useState(null);
   const { t } = useTranslation();
+
+  let startY = 0;
+
+const handleTouchStart = (e) => {
+  startY = e.touches[0].clientY;
+};
+
+const handleTouchMove = (e) => {
+  const currentY = e.touches[0].clientY;
+  if (currentY - startY > 120) {
+    setSelectedCrop(null);
+  }
+};
+
+useEffect(() => {
+  document.body.style.overflow = selectedCrop ? "hidden" : "auto";
+}, [selectedCrop]);
+
+const [setZoomed] = useState(false);
+const handleDoubleClick = () => {
+  setZoomed((prev) => !prev);
+};
 
   return (
     <section className="crop-section">
@@ -33,7 +55,12 @@ const CropGallery = () => {
 
       {/* POPUP */}
       {selectedCrop && (
-        <div className="popup-overlay" onClick={() => setSelectedCrop(null)}>
+        <div
+        className="popup-overlay"
+        onClick={() => setSelectedCrop(null)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+      >
           <div
             className="popup-box"
             onClick={(e) => e.stopPropagation()}
@@ -45,11 +72,11 @@ const CropGallery = () => {
               ✕
             </button>
 
-            {/* POPUP */}
+{/* POPUP */}
 {selectedCrop && (
   <div className="popup-overlay" onClick={() => setSelectedCrop(null)}>
     <div
-      className="popup-box"
+      className="popup-box image-only"
       onClick={(e) => e.stopPropagation()}
     >
       <button
@@ -60,16 +87,14 @@ const CropGallery = () => {
       </button>
 
       <img
-        src={selectedCrop.popupImage ? selectedCrop.popupImage : selectedCrop.image}
+        src={selectedCrop.popupImage || selectedCrop.image}
         alt={selectedCrop.name}
-        className="popup-img"
+        className="popup-img-full"
       />
-
-      <h2 className="popup-title">{selectedCrop.name}</h2>
-      <p className="popup-desc">{selectedCrop.description}</p>
     </div>
   </div>
 )}
+
 
 
             <h2 className="popup-title">{selectedCrop.name}</h2>
