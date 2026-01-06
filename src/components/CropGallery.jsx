@@ -32,7 +32,7 @@ const handleDoubleClick = () => {
 
   return (
     <section className="crop-section">
-      <h2 className="crop-title">{t("cropGallery.title")}</h2>
+      <h3 className="crop-title">{t("cropGallery.title")}</h3>
       <h1 className="crop-subtitle">{t("cropGallery.subtitle")}</h1>
 
       {/* GRID */}

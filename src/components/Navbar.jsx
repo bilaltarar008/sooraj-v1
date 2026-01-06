@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import logo from "../assets/sooraj-logo.PNG";
-import products from "../data/products";
+// import products from "../data/products";
+import { searchIndex } from "../data/searchIndex";
 import { useTranslation } from "react-i18next";
 import LanguageToggle from "./LanguageToggle";
 import "./Navbar.css";
@@ -25,29 +26,21 @@ export default function Navbar({ search, setSearch }) {
 
   const handleSearchChange = (value) => {
     setSearch(value);
-
-    if (!value || value.trim() === "") {
+  
+    if (!value.trim()) {
       setResults([]);
       return;
     }
-
+  
     const q = value.toLowerCase();
-    const filtered = products.filter((item) => {
-      const enName = item?.name?.en?.toLowerCase?.() || "";
-      const urName = item?.name?.ur?.toLowerCase?.() || "";
-      const brandEn = item?.brand?.en?.toLowerCase?.() || "";
-      const brandUr = item?.brand?.ur?.toLowerCase?.() || "";
-
-      return (
-        enName.includes(q) ||
-        urName.includes(q) ||
-        brandEn.includes(q) ||
-        brandUr.includes(q)
-      );
-    });
-
+  
+    const filtered = searchIndex.filter((item) =>
+      item.keywords.some((k) => k.includes(q))
+    );
+  
     setResults(filtered);
   };
+  
 
   return (
     <header className="navbar">
@@ -115,22 +108,21 @@ export default function Navbar({ search, setSearch }) {
           {/* search results panel — absolute so it won't resize the navbar */}
           {results.length > 0 && (
             <div className="search-results" role="listbox">
-              {results.slice(0, 8).map((item) => (
-                <Link
-                  key={item.id}
-                  to={`/products/${item.id}`}
-                  className="search-result-item"
-                  onClick={() => setResults([])}
-                >
-                  {/* Prefer english name when available otherwise urdu */}
-                  {item?.name?.en ? item.name.en : item?.name?.ur}
-                  {/* optionally show brand short: */}
-                  <span className="search-result-sub">
-                    {" "}
-                    — {item?.brand?.en ? item.brand.en : item?.brand?.ur}
-                  </span>
-                </Link>
-              ))}
+              {results.slice(0, 8).map((item, index) => (
+  <Link
+    key={index}
+    to={item.path}
+    className="search-result-item"
+    onClick={() => setResults([])}
+  >
+    {item.label}
+    <span className="search-result-sub">
+      — {item.type}
+    </span>
+  </Link>
+))}
+
+                
             </div>
           )}
         </div>

@@ -3,10 +3,11 @@ import rice from "../assets/crops/rice.jpg";
 import wheat from "../assets/crops/wheat.jpg";
 import maize from "../assets/crops/maize.jpg";
 import potato from "../assets/crops/potato.jpg";
-import WaterMelon from "../assets/crops/WaterMelon.jpg"
 import Strawberry from "../assets/crops/Strawberry.jpg"
 import wheatPopup from "../assets/crops/wheat-popup.jpg"
-import Citrus from "../assets/crops/Citrus.jpg"
+import Citrus from "../assets/crops/Citrus.jpg";
+import vege from "../assets/crops/vegetable-popup.jpeg"
+import Sugarcane from "../assets/crops/Sugarcane.jpg"
 import Vegetables from "../assets/crops/Vegetables.jpg"
 
 export const crops = [
@@ -39,9 +40,9 @@ export const crops = [
   },
   {
     id: 6,
-    name: "WaterMelon",
-    image: WaterMelon,
-    description: "mango is widely used in textiles."
+    name: "Sugar cane",
+    image: Sugarcane,
+    description: "Sugarcane is widely used for sugar production"
   },
   {
     id: 7,
@@ -65,6 +66,7 @@ export const crops = [
     id: 10,
     name: "Vegetables",
     image: Vegetables,
+    popupImage: vege,
     description: "sugar cane are rich, filling, and versatile."
   },
 ];

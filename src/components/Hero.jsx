@@ -23,10 +23,11 @@ const Hero = () => {
     <section className="hero-section">
       {/* LEFT TEXT */}
       <div className="hero-text">
-        <h2>{t("heroTitle")}</h2>
-        <h5>{t("heroPara1")}</h5>
-        <h5>{t("heroPara2")}</h5>
-      </div>
+  <h3 className="hero-title">{t("heroTitle")}</h3>
+  <h5 className="hero-para primary">{t("heroPara1")}</h5>
+  <h5 className="hero-para secondary">{t("heroPara2")}</h5>
+</div>
+
 
       {/* HERO IMAGE SLIDER */}
       <div className="hero-carousel">

@@ -193,5 +193,88 @@
     transform: translateY(-4px);
   }
   
+/* ==========================
+   MOBILE FOOTER — CLEAN & COMPACT
+=========================== */
+@media (max-width: 768px) {
+  .footer-main {
+    padding: 24px 16px;
+    gap: 22px;
+  }
+
+  /* Remove hover motion on mobile */
+  .footer-col:hover,
+  .footer li:hover,
+  .socials a:hover {
+    transform: none;
+  }
+
+  /* Headings smaller & tighter */
+  .footer h2,
+  .footer h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  /* Text alignment */
+  .footer p,
+  .footer li {
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* QUICK LINKS & PRODUCTS — 2 COLUMN GRID */
+  .footer ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+    justify-items: center;
+  }
+
+  .footer li {
+    margin-bottom: 0;
+  }
+
+  /* SOCIAL ICONS — CENTER & SMALLER */
+  .socials {
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .socials a {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  /* CONTACT — STACKED & COMPACT */
+  .contact-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contact-info p {
+    font-size: 13px;
+    justify-content: center;
+  }
+
+  /* MAP — SMALL, CENTERED, LAST */
+  .small-map {
+    width: 100%;
+    max-width: 260px;
+    height: 120px;
+    margin-top: 8px;
+    border-radius: 12px;
+  }
+
+  /* Footer bottom */
+  .footer-bottom {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
 
   

@@ -14,7 +14,9 @@
 /* LEFT TEXT */
 .hero-text {
   flex: 1;
-  color: #080808;
+  color: #0b0b0b;
+  padding-left: 1.2rem;
+  border-left: 4px solid rgba(46, 125, 50, 0.25);
 }
 
 .hero-text h1 {
@@ -60,6 +62,15 @@
     padding: 2rem 1.5rem;
   }
 
+  .hero-title {
+    font-size: 2.3rem;
+  }
+
+  .hero-para {
+    font-size: 1.1rem;
+  }
+
+
   .hero-text h1 {
     font-size: 2.3rem;
   }
@@ -88,6 +99,19 @@
     font-size: 1rem;
   }
 
+  .hero-text {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-para {
+    font-size: 1rem;
+  }
+
   .hero-carousel {
     height: 300px;
   }
@@ -96,6 +120,10 @@
 /* SMALL MOBILE */
 @media (max-width: 480px) {
   .hero-text h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero-title {
     font-size: 1.7rem;
   }
 
@@ -114,4 +142,23 @@
     opacity: 1;
     transform: translateX(0px);
   }
+}
+
+.hero-para {
+  font-size: 1.25rem;
+  line-height: 1.65;
+  margin-bottom: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+/* FIRST PARA — STRONGER */
+.hero-para.primary {
+  color: #2f2f2f;
+  font-weight: 500;
+}
+
+/* SECOND PARA — SOFTER */
+.hero-para.secondary {
+  color: #5f6f63; /* calm green-grey */
+  font-weight: 400;
 }
