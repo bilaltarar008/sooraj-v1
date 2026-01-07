@@ -33,7 +33,7 @@ export const searchIndex = [
 
       // Brand
       "sooraj",
-      "sooraj crop sciences",
+      "sooraj sciences",
       "sooraj agriculture",
 
       // Agriculture intent
@@ -95,7 +95,7 @@ export const searchIndex = [
       "about sooraj",
       "sooraj company",
       "agriculture experts",
-      "crop specialists",
+      "specialists",
 
       // Dealer related
       "dealer",
@@ -136,6 +136,7 @@ export const searchIndex = [
       "farm products",
       "agriculture products",
       "crop solutions",
+      "pesticide",
 
       // Categories
       "fungicide",
@@ -273,6 +274,13 @@ export const searchIndex = [
       "herbicide",
       "micronutrient",
       "fertilizer",
+      "Fungicide",
+      "Insecticide",
+      "Herbicides",
+      "Micronutrient",
+      "Fertilizer",
+      "Granule",
+      "pesticide",
 
       // Technical
       p?.composition,

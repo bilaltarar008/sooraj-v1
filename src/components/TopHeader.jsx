@@ -16,6 +16,7 @@ export default function TopHeader() {
     padding: 0,
     display: "flex",
     alignItems: "center",
+    height: "100%",
   };
 
   return (
@@ -24,35 +25,67 @@ export default function TopHeader() {
         width: "100%",
         background: "#0d6a32",
         color: "white",
-        padding: "6px 0",
-        fontSize: "0.9rem",
+
+        /* 🔒 LOCK HEIGHT */
+        height: "36px",
+        minHeight: "36px",
+
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <div
         style={{
           maxWidth: "1250px",
           margin: "0 auto",
+          width: "100%",
+
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+
           padding: "0 20px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <MdEmail size={17} />
+        {/* LEFT */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+
+            /* 🔒 PREVENT HEIGHT CHANGE */
+            lineHeight: "1",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <MdEmail size={16} />
           <a
             href="mailto:Soorajcropscience@gmail.com"
             style={{
               color: "white",
               textDecoration: "none",
-              fontWeight: "500",
+              fontWeight: "300",
+
+              /* 🔒 FONT CONTROL */
+              fontSize: "13px",
+              lineHeight: "1",
+              whiteSpace: "nowrap",
             }}
           >
             SoorajCropScience@gmail.com
           </a>
         </div>
 
-        <div style={{ display: "flex", gap: "12px" }}>
+        {/* RIGHT */}
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
           <button
             style={iconButtonStyle}
             onClick={() =>
@@ -62,28 +95,41 @@ export default function TopHeader() {
               )
             }
           >
-            <FaFacebookF size={16} />
+            <FaFacebookF size={15} />
           </button>
+
           <button
             style={iconButtonStyle}
-            onClick={() => window.open("https://instagram.com/soorajcropsciences", "_blank")}
+            onClick={() =>
+              window.open(
+                "https://instagram.com/soorajcropsciences",
+                "_blank"
+              )
+            }
           >
-            <FaInstagram size={16} />
+            <FaInstagram size={15} />
           </button>
+
           <button
             style={iconButtonStyle}
-            onClick={() => window.open("https://wa.me/04235111003", "_blank")}
+            onClick={() =>
+              window.open("https://wa.me/04235111003", "_blank")
+            }
           >
-            <FaWhatsapp size={16} />
+            <FaWhatsapp size={15} />
           </button>
+
           <button
             style={iconButtonStyle}
             onClick={() => window.open("https://linkedin.com", "_blank")}
           >
-            <FaLinkedinIn size={16} />
+            <FaLinkedinIn size={15} />
           </button>
         </div>
       </div>
     </div>
   );
+  
 }
+
+

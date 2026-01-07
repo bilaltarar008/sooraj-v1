@@ -33,3 +33,14 @@ body[dir="ltr"] {
     transform: translateX(0);
   }
 }
+
+/* ===== Fix Urdu line-height layout shift ===== */
+body[lang="ur"] {
+  line-height: 1.2;
+}
+
+/* ===== Lock TopHeader height regardless of language ===== */
+.top-header,
+.top-header * {
+  line-height: 1 !important;
+}
