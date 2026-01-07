@@ -58,7 +58,7 @@ export const crops = [
   // },
   {
     id: 9,
-    name: "Citrus",
+    name: "Citrus ",
     image: Citrus,
     description: "grapes is a global food & feed crop."
   },
