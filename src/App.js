@@ -22,7 +22,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import products from "./data/products";
-
+import Testimonials from "./pages/Testimonials";
 /* ===========================
    SEARCH RESULTS DROPDOWN
 =========================== */
@@ -115,6 +115,7 @@ export default function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/career" element={<Career />} />
           <Route path="*" element={<Products />} />
         </Routes>

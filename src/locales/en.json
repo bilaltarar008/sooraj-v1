@@ -3,6 +3,7 @@
   "About": "About",
   "Products": "Products",
   "Contact": "Contact",
+  "Testimonials": "Testimonials",
   "Career": "Career",
 
   "heroTitle1": "Sooraj Crop Sciences",
@@ -162,6 +163,7 @@
     "about": "About",
     "productPage": "Products",
     "contact": "Contact",
+    "testimonials": "Testimonials",
     "career": "Career"
   },
   "categories": {
