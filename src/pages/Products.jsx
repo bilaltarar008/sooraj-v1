@@ -17,6 +17,28 @@ export default function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
 
+  /* ======================================================
+   🔼 SCROLL TO EXTREME TOP ON PAGE OPEN / REFRESH
+====================================================== */
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  /* ======================================================
+   🔼 SCROLL TO EXTREME TOP ON PAGINATION CHANGE
+====================================================== */
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [currentPage]);
+
   // FINAL FIXED CATEGORY LIST (NO DUPLICATES + TRANSLATIONS)
   const categories = [
     t("product.all", "All"),
@@ -45,10 +67,6 @@ export default function Products() {
     indexOfLastProduct
   );
 
-  // -------------------------------
-  // FUNCTIONS
-  // -------------------------------
-
   // Pagination function
   const paginate = (pageNumber) => {
     if (pageNumber < 1 || pageNumber > totalPages) return;
@@ -60,19 +78,20 @@ export default function Products() {
     setExpandedProduct(expandedProduct === id ? null : id);
   };
 
-  // Scroll to product grid after page or category changes
+  /* ======================================================
+     ❌ DISABLED: Scroll to product grid on page/category change
+  ====================================================== */
+  /*
   useEffect(() => {
     const productGrid = document.querySelector(".product-grid");
     if (productGrid) {
       const offsetTop =
-        productGrid.getBoundingClientRect().top + window.scrollY - 20; // adjust for header if needed
+        productGrid.getBoundingClientRect().top + window.scrollY - 20;
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
-  }, [currentPage, selectedCategory]); // triggers on page or category change
+  }, [currentPage, selectedCategory]);
+  */
 
-  // -------------------------------
-  // JSX
-  // -------------------------------
   return (
     <div className="products-container">
       <h1 className="page-title">{t("product.title") || "Products"}</h1>
@@ -84,7 +103,7 @@ export default function Products() {
             key={index}
             onClick={() => {
               setSelectedCategory(category);
-              setCurrentPage(1); // reset page when category changes
+              setCurrentPage(1);
             }}
             className={selectedCategory === category ? "active" : ""}
           >
@@ -105,31 +124,26 @@ export default function Products() {
               onClick={() => navigate(`/products/${p.id}`)}
               style={{ cursor: "pointer" }}
             >
-              {/* IMAGE */}
               <img
                 src={p.image}
                 alt={p.name?.[lang] || p.name?.en}
                 className="product-image"
               />
 
-              {/* NAME */}
               <h3 className="product-name">{p.name?.[lang] || p.name?.en}</h3>
 
-              {/* BASIC INFO */}
               <div className="product-info">
                 <p>{p.chemical?.[lang] || p.chemical?.en}</p>
-
                 <p>
                   <strong>{t("product.pack", "Pack Size")}:</strong>{" "}
                   {p.packSize?.[lang] || p.packSize?.en}
                 </p>
               </div>
 
-              {/* READ MORE / HIDE DETAILS BUTTON */}
               <button
                 className="read-more-btn"
                 onClick={(e) => {
-                  e.stopPropagation(); // prevent card click navigation
+                  e.stopPropagation();
                   toggleDetails(p.id);
                 }}
               >
@@ -138,7 +152,6 @@ export default function Products() {
                   : t("product.readMore", "Read more")}
               </button>
 
-              {/* DETAILS PREVIEW */}
               <AnimatePresence>
                 {isExpanded && (
                   <motion.ul
