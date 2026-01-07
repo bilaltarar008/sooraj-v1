@@ -65,9 +65,7 @@ export default function TopHeader() {
             style={{
               color: "white",
               textDecoration: "none",
-              fontWeight: "300",
-
-              /* 🔒 FONT CONTROL */
+              fontWeight: "700",
               fontSize: "13px",
               lineHeight: "1",
               whiteSpace: "nowrap",
