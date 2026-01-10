@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "./ProjectBanner.css"; // We'll create this CSS file
+import "./ProjectBanner.css";
 
-// ====================== Banner Slider Component ======================
 const ProjectBanner = () => {
   const slides = [
     {
@@ -18,15 +17,23 @@ const ProjectBanner = () => {
       id: 3,
       image: require("../assets/main-solgan2.jpeg"),
       alt: "Main Project Banner 3",
-    //   caption: "Explore Our Latest Achievements",
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [startX, setStartX] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
   const slideDuration = 7000;
 
   const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  }, [slides.length]);
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? slides.length - 1 : prev - 1
+    );
   }, [slides.length]);
 
   useEffect(() => {
@@ -34,20 +41,46 @@ const ProjectBanner = () => {
     return () => clearInterval(timer);
   }, [goToNext]);
 
+  const handleStart = (x) => {
+    setStartX(x);
+    setIsDragging(true);
+  };
+
+  const handleEnd = (x) => {
+    if (!isDragging || startX === null) return;
+
+    const diff = startX - x;
+
+    if (diff > 50) goToNext();     // swipe left
+    if (diff < -50) goToPrev();   // swipe right
+
+    setStartX(null);
+    setIsDragging(false);
+  };
+
   return (
-    <div className="banner-container">
+    <div
+      className="banner-container"
+      onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+      onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
+      onMouseDown={(e) => handleStart(e.clientX)}
+      onMouseUp={(e) => handleEnd(e.clientX)}
+      onMouseLeave={() => setIsDragging(false)}
+    >
       <div
         className="banner-slider"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {slides.map((slide) => (
           <div key={slide.id} className="banner-slide">
-            <img src={slide.image} alt={slide.alt} className="banner-image" />
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              className="banner-image"
+              draggable="false"
+            />
             <div className="banner-overlay">
-              <div className="banner-text">
-                <h2>{slide.caption}</h2>
-                {/* <button onClick={goToNext}>Learn More</button> */}
-              </div>
+              <div className="banner-text" />
             </div>
           </div>
         ))}
