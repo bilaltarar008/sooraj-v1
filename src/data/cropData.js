@@ -4,8 +4,9 @@ import wheat from "../assets/crops/wheat.jpg";
 import maize from "../assets/crops/maize.jpg";
 import potato from "../assets/crops/potato.jpg";
 import Strawberry from "../assets/crops/Strawberry.jpg"
-import wheatPopup from "../assets/crops/wheat-popup.jpg"
+import wheatPopup from "../assets/crops/wheat-popup.jpeg"
 import Citrus from "../assets/crops/Citrus.jpg";
+import Patato from "../assets/crops/alooPopup.jpeg";
 import vege from "../assets/crops/vegetable-popup.jpeg"
 import Sugarcane from "../assets/crops/Sugarcane.jpg"
 import Vegetables from "../assets/crops/Vegetables.jpg"
@@ -36,6 +37,7 @@ export const crops = [
     id: 5,
     name: "Potato",
     image: potato,
+    popupImage: Patato,
     description: "Potatoes are rich, filling, and versatile."
   },
   {
