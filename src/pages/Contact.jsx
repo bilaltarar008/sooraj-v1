@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   FaEnvelope,
@@ -36,14 +36,33 @@ const labelStyle = {
 export default function Contact() {
   const { t } = useTranslation();
 
-  /* ✅ SHOW SUCCESS MESSAGE AFTER REDIRECT */
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("success") === "true") {
-      alert("Thank you! Your message has been sent successfully.");
-      window.history.replaceState({}, document.title, "/contact");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const name = formData.get("name");
+
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/soorajcropsciences@gmail.com",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        alert(t("contact.thankYou", { name }));
+        form.reset();
+      } else {
+        alert("❌ Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("❌ Network error. Please try again.");
     }
-  }, []);
+  };
 
   return (
     <section
@@ -53,6 +72,7 @@ export default function Contact() {
         minHeight: "100vh",
       }}
     >
+      {/* TITLE */}
       <h2
         style={{
           color: "#0d6a32",
@@ -95,85 +115,61 @@ export default function Contact() {
             {t("contact.sendMessage")}
           </h3>
 
-          {/* ✅ FORM SUBMIT */}
           <form
-  action="https://formsubmit.co/soorajcropsciences@gmail.com"
-  method="POST"
-  style={{ display: "flex", flexDirection: "column", gap: "20px" }}
->
-  {/* 🔒 FormSubmit configuration */}
-  <input type="hidden" name="_captcha" value="false" />
+            onSubmit={handleSubmit}
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          >
+            {/* FormSubmit config */}
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from Sooraj Crop Sciences website"
+            />
 
-  <input
-    type="hidden"
-    name="_subject"
-    value="New message from Sooraj Crop Sciences website"
-  />
+            {/* NAME */}
+            <div style={{ position: "relative" }}>
+              <input type="text" name="name" required placeholder=" " style={inputStyle} />
+              <label style={labelStyle}>{t("contact.name")}</label>
+            </div>
 
-  {/* 🔁 Redirect after success */}
-  <input
-    type="hidden"
-    name="_next"
-    value="https://soorajcropsciences.com/contact"
-  />
+            {/* EMAIL */}
+            <div style={{ position: "relative" }}>
+              <input type="email" name="email" required placeholder=" " style={inputStyle} />
+              <label style={labelStyle}>{t("contact.email")}</label>
+            </div>
 
-  <input type="hidden" name="_template" value="table" />
+            {/* MESSAGE */}
+            <div style={{ position: "relative" }}>
+              <textarea
+                name="message"
+                rows="5"
+                required
+                placeholder=" "
+                style={{ ...inputStyle, resize: "none" }}
+              />
+              <label style={labelStyle}>{t("contact.message")}</label>
+            </div>
 
-  {/* 👤 Name */}
-  <div style={{ position: "relative" }}>
-    <input
-      type="text"
-      name="name"
-      required
-      placeholder=" "
-      style={inputStyle}
-    />
-    <label style={labelStyle}>{t("contact.name")}</label>
-  </div>
-
-  {/* 📧 Email */}
-  <div style={{ position: "relative" }}>
-    <input
-      type="email"
-      name="email"
-      required
-      placeholder=" "
-      style={inputStyle}
-    />
-    <label style={labelStyle}>{t("contact.email")}</label>
-  </div>
-
-  {/* 💬 Message */}
-  <div style={{ position: "relative" }}>
-    <textarea
-      name="message"
-      rows="5"
-      required
-      placeholder=" "
-      style={{ ...inputStyle, resize: "none" }}
-    />
-    <label style={labelStyle}>{t("contact.message")}</label>
-  </div>
-
-  {/* 🚀 Submit */}
-  <button
-    type="submit"
-    style={{
-      marginTop: "10px",
-      background: "linear-gradient(135deg, #00A651, #0d6a32)",
-      color: "#fff",
-      border: "none",
-      padding: "14px",
-      borderRadius: "8px",
-      fontSize: "1rem",
-      fontWeight: "700",
-      cursor: "pointer",
-    }}
-  >
-    {t("contact.send")}
-  </button>
-</form>
-
+            {/* SUBMIT */}
+            <button
+              type="submit"
+              style={{
+                marginTop: "10px",
+                background: "linear-gradient(135deg, #00A651, #0d6a32)",
+                color: "#fff",
+                border: "none",
+                padding: "14px",
+                borderRadius: "8px",
+                fontSize: "1rem",
+                fontWeight: "700",
+                cursor: "pointer",
+              }}
+            >
+              {t("contact.send")}
+            </button>
+          </form>
         </div>
 
         {/* ================= CONTACT INFO ================= */}
@@ -181,22 +177,20 @@ export default function Contact() {
       </div>
 
       {/* ================= MAP ================= */}
-<div style={{ marginTop: "60px", textAlign: "center" }}>
-  <iframe
-    title="office-map"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.8676070868432!2d74.2161747!3d31.460239899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3918fdb317556ee1%3A0xa86cfb82b905c2d0!2sSooraj%20Crop%20Sciences%20Warehouse!5e1!3m2!1sen!2s!4v1765800819286!5m2!1sen!2s"
-    width="100%"
-    height="350"
-    style={{
-      border: 0,
-      borderRadius: "12px",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    }}
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-  />
-</div>
-
+      <div style={{ marginTop: "60px", textAlign: "center" }}>
+        <iframe
+          title="office-map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.8676070868432!2d74.2161747!3d31.460239899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3918fdb317556ee1%3A0xa86cfb82b905c2d0!2sSooraj%20Crop%20Sciences%20Warehouse!5e1!3m2!1sen!2s!4v1765800819286!5m2!1sen!2s"
+          width="100%"
+          height="350"
+          style={{
+            border: 0,
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          }}
+          loading="lazy"
+        />
+      </div>
     </section>
   );
 }
@@ -204,6 +198,8 @@ export default function Contact() {
 /* ================= CONTACT INFO ================= */
 
 function ContactInfo() {
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -224,15 +220,15 @@ function ContactInfo() {
           textAlign: "center",
         }}
       >
-        Contact Info
+        {t("contact.infoTitle")}
       </div>
 
       <div style={{ padding: "30px", display: "flex", flexDirection: "column", gap: "18px" }}>
-        <Info icon={<FaEnvelope />} title="Email" value="SoorajCropScience@gmail.com" link="mailto:SoorajCropScience@gmail.com" />
-        <Info icon={<FaWhatsapp />} title="WhatsApp" value="Chat Now" link="https://wa.me/924235111003" />
-        <Info icon={<FaPhone />} title="Phone" value="04235111003" link="tel:04235111003" />
-        <Info icon={<FaMapMarkerAlt />} title="Office" value="Apartment 01 Floor 02 Almeezan Arcade 24-CCA, Khayaban E Ameen, Lahore, 54770, Pakistan" />
-        <Info icon={<FaClock />} title="Hours" value="Mon–Fri, 9AM–6PM" />
+        <Info icon={<FaEnvelope />} title={t("contact.emailLabel")} value="SoorajCropScience@gmail.com" link="mailto:SoorajCropScience@gmail.com" />
+        <Info icon={<FaWhatsapp />} title={t("contact.whatsapp")} value={t("contact.chatNow")} link="https://wa.me/924235111003" />
+        <Info icon={<FaPhone />} title={t("contact.phone")} value="04235111003" link="tel:04235111003" />
+        <Info icon={<FaMapMarkerAlt />} title={t("contact.office")} value={t("contact.address")} />
+        <Info icon={<FaClock />} title={t("contact.hours")} value={t("contact.timing")} />
       </div>
     </div>
   );
