@@ -119,7 +119,7 @@ export default function TopHeader() {
 
           <button
             style={iconButtonStyle}
-            onClick={() => window.open("https://linkedin.com", "_blank")}
+            onClick={() => window.open("https://www.linkedin.com/company/sooraj-crop-sciences/", "_blank")}
           >
             <FaLinkedinIn size={15} />
           </button>
