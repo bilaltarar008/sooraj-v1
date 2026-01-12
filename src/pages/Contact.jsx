@@ -97,66 +97,83 @@ export default function Contact() {
 
           {/* ✅ FORM SUBMIT */}
           <form
-            action="https://formsubmit.co/soorajcropsciences@gmail.com"
-            method="POST"
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
-            {/* 🔒 Hidden config */}
-            <input type="hidden" name="_captcha" value="false" />
-            <input
-              type="hidden"
-              name="_subject"
-              value="New message from Sooraj Crop Sciences website"
-            />
-            <input
-              type="hidden"
-              name="_template"
-              value="table"
-            />
-            <input
-              type="hidden"
-              name="_next"
-              value="https://soorajcropsciences.com/contact?success=true"
-            />
+  action="https://formsubmit.co/soorajcropsciences@gmail.com"
+  method="POST"
+  style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+>
+  {/* 🔒 FormSubmit configuration */}
+  <input type="hidden" name="_captcha" value="false" />
 
-            <div style={{ position: "relative" }}>
-              <input type="text" name="name" required placeholder=" " style={inputStyle} />
-              <label style={labelStyle}>{t("contact.name")}</label>
-            </div>
+  <input
+    type="hidden"
+    name="_subject"
+    value="New message from Sooraj Crop Sciences website"
+  />
 
-            <div style={{ position: "relative" }}>
-              <input type="email" name="email" required placeholder=" " style={inputStyle} />
-              <label style={labelStyle}>{t("contact.email")}</label>
-            </div>
+  {/* 🔁 Redirect after success */}
+  <input
+    type="hidden"
+    name="_next"
+    value="https://soorajcropsciences.com/contact"
+  />
 
-            <div style={{ position: "relative" }}>
-              <textarea
-                name="message"
-                rows="5"
-                required
-                placeholder=" "
-                style={{ ...inputStyle, resize: "none" }}
-              />
-              <label style={labelStyle}>{t("contact.message")}</label>
-            </div>
+  <input type="hidden" name="_template" value="table" />
 
-            <button
-              type="submit"
-              style={{
-                marginTop: "10px",
-                background: "linear-gradient(135deg, #00A651, #0d6a32)",
-                color: "#fff",
-                border: "none",
-                padding: "14px",
-                borderRadius: "8px",
-                fontSize: "1rem",
-                fontWeight: "700",
-                cursor: "pointer",
-              }}
-            >
-              {t("contact.send")}
-            </button>
-          </form>
+  {/* 👤 Name */}
+  <div style={{ position: "relative" }}>
+    <input
+      type="text"
+      name="name"
+      required
+      placeholder=" "
+      style={inputStyle}
+    />
+    <label style={labelStyle}>{t("contact.name")}</label>
+  </div>
+
+  {/* 📧 Email */}
+  <div style={{ position: "relative" }}>
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder=" "
+      style={inputStyle}
+    />
+    <label style={labelStyle}>{t("contact.email")}</label>
+  </div>
+
+  {/* 💬 Message */}
+  <div style={{ position: "relative" }}>
+    <textarea
+      name="message"
+      rows="5"
+      required
+      placeholder=" "
+      style={{ ...inputStyle, resize: "none" }}
+    />
+    <label style={labelStyle}>{t("contact.message")}</label>
+  </div>
+
+  {/* 🚀 Submit */}
+  <button
+    type="submit"
+    style={{
+      marginTop: "10px",
+      background: "linear-gradient(135deg, #00A651, #0d6a32)",
+      color: "#fff",
+      border: "none",
+      padding: "14px",
+      borderRadius: "8px",
+      fontSize: "1rem",
+      fontWeight: "700",
+      cursor: "pointer",
+    }}
+  >
+    {t("contact.send")}
+  </button>
+</form>
+
         </div>
 
         {/* ================= CONTACT INFO ================= */}
