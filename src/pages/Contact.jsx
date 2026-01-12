@@ -162,6 +162,24 @@ export default function Contact() {
         {/* ================= CONTACT INFO ================= */}
         <ContactInfo />
       </div>
+
+      {/* ================= MAP ================= */}
+<div style={{ marginTop: "60px", textAlign: "center" }}>
+  <iframe
+    title="office-map"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.8676070868432!2d74.2161747!3d31.460239899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3918fdb317556ee1%3A0xa86cfb82b905c2d0!2sSooraj%20Crop%20Sciences%20Warehouse!5e1!3m2!1sen!2s!4v1765800819286!5m2!1sen!2s"
+    width="100%"
+    height="350"
+    style={{
+      border: 0,
+      borderRadius: "12px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    }}
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
+
     </section>
   );
 }
