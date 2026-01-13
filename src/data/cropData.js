@@ -8,7 +8,7 @@ import wheatPopup from "../assets/crops/wheat-popup.jpeg"
 
 import Citrus from "../assets/crops/Citrus.jpg";
 import Patato from "../assets/crops/alooPopup.jpeg";
-import vege from "../assets/crops/vegetable-popup.jpeg"
+import Sugarcanepop from "../assets/crops/vegetable-popup.jpeg"
 import Sugarcane from "../assets/crops/Sugarcane.jpg"
 import Vegetables from "../assets/crops/Vegetables.jpg"
 
@@ -45,6 +45,7 @@ export const crops = [
     id: 6,
     name: "Sugar cane",
     image: Sugarcane,
+    popupImage: Sugarcanepop,
     description: "Sugarcane is widely used for sugar production"
   },
   {
@@ -69,7 +70,6 @@ export const crops = [
     id: 10,
     name: "Vegetables",
     image: Vegetables,
-    popupImage: vege,
     description: "sugar cane are rich, filling, and versatile."
   },
 ];
