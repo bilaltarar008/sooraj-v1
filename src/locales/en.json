@@ -19,6 +19,7 @@
   "heroPara1": "At Sooraj Crop Science, we are dedicated to delivering high-quality crop protection and nutrition solutions to farmers across Pakistan. As a trusted supplier of fungicides, insecticides, and micronutrients, we provide advanced and sustainable methods to ensure the health and productivity of crops from planting to harvest.",
 
   "heroPara2": "Crops face constant threats from insects, fungi, and nutrient imbalances, as well as unpredictable weather conditions such as heat, cold, drought, and floods. We partner with farmers to tackle these challenges, ensuring safe, nutritious, and high-quality produce.",
+
   "videoHeading": "Latest Videos from Sooraj Crops",
   "visitChannel": "Visit Channel",
 
@@ -58,8 +59,11 @@
     "ourSuppliers": "Our Suppliers",
     "title": "Our Products",
     "readMore": "Read more",
-    "hideDetails": "Hide Details"
+    "hideDetails": "Hide Details",
+    "backToProducts": "Back to Products",
+    "details": "Product Details"
   },
+
   "about": {
     "whoTitle": "Who We Are",
     "whoPara1": "Sooraj Crop Sciences is a modern agricultural enterprise committed to empowering farmers across Pakistan through innovation, science, and trusted partnerships.",
@@ -88,6 +92,7 @@
     "dealerConsultancy": "Dealer Business Consultancy",
     "householdSolutions": "Household Solutions"
   },
+
   "contact": {
     "title": "Contact Us",
     "sendMessage": "Send Us a Message",
@@ -107,6 +112,7 @@
     "chatNow": "Chat Now",
     "infoTitle": "Contact Now"
   },
+
   "career": {
     "heroTitle": "Be part of our mission",
     "heroText": "At Sooraj Crop Sciences, we empower farmers with innovation. Join our mission to improve agriculture with sustainable crop solutions.",
@@ -144,10 +150,12 @@
       }
     }
   },
+
   "cropGallery": {
     "title": "Crops That We Protect",
     "subtitle": "Our specialized solutions safeguard a variety of essential crops."
   },
+
   "footer": {
     "brand": "Sooraj Crop Sciences",
     "address": "Apartment 01 Floor 02 Almeezan Arcade 24-CCA, Khayaban-e-Ameen, Lahore 54770",
@@ -158,6 +166,7 @@
     "findUs": "Find Us",
     "copyright": "Sooraj Crop Sciences — All Rights Reserved"
   },
+
   "nav": {
     "home": "Home",
     "about": "About",
@@ -166,10 +175,40 @@
     "testimonials": "Testimonials",
     "career": "Career"
   },
+
   "categories": {
     "all": "All",
     "fungicide": "Fungicide",
     "insecticide": "Insecticide",
     "micronutrients": "Micronutrients"
+  },
+
+  "testimonials": {
+    "heroTitle": "Testimonials",
+    "heroDescription": "Here are some quotes from professionals in the farming industry. 80% of these farmers would recommend our services to others.",
+    "videoSectionTitle": "Customer Video Testimonials",
+    "reviewsSectionTitle": "What People Say",
+    "reviews": [
+      {
+        "name": "Mr. Ali Khan",
+        "role": "Farmer",
+        "text": "We have utilized the services for over a year. The technology is reliable and provides real-time information from the field."
+      },
+      {
+        "name": "Mrs. Ayesha Raza",
+        "role": "Agri Consultant",
+        "text": "Highly recommend their services. The deployment in remote areas works flawlessly."
+      },
+      {
+        "name": "Mr. Fahad Tariq",
+        "role": "Farm Owner",
+        "text": "The platform has simplified our monitoring and decision-making process."
+      },
+      {
+        "name": "Mr. Rana Iqbal",
+        "role": "Agriculture Researcher",
+        "text": "The insights provided have helped farmers make better decisions and increase productivity."
+      }
+    ]
   }
 }

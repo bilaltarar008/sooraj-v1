@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/testimonials.css";
 
 export default function Testimonials() {
+  const { t } = useTranslation();
+
   const reels = [
     "https://www.facebook.com/reel/1641404513891525/",
     "https://www.facebook.com/reel/627314713646157/",
@@ -10,41 +13,36 @@ export default function Testimonials() {
 
   const reviews = [
     {
-      name: "Mr. Ali Khan",
-      role: "Farmer",
-      review:
-        "We have utilized the services for over a year. The technology is reliable and provides real-time information from the field.",
+      name: t("testimonials.reviews.0.name"),
+      role: t("testimonials.reviews.0.role"),
+      review: t("testimonials.reviews.0.text"),
       rating: 5,
     },
     {
-      name: "Mrs. Ayesha Raza",
-      role: "Agri Consultant",
-      review:
-        "Highly recommend their services. The deployment in remote areas works flawlessly.",
+      name: t("testimonials.reviews.1.name"),
+      role: t("testimonials.reviews.1.role"),
+      review: t("testimonials.reviews.1.text"),
       rating: 4,
     },
     {
-      name: "Mr. Fahad Tariq",
-      role: "Farm Owner",
-      review:
-        "The platform has simplified our monitoring and decision-making process.",
+      name: t("testimonials.reviews.2.name"),
+      role: t("testimonials.reviews.2.role"),
+      review: t("testimonials.reviews.2.text"),
       rating: 4.5,
     },
     {
-      name: "Mr. Rana Iqbal",
-      role: "Agriculture Researcher",
-      review:
-        "The insights provided have helped farmers make better decisions and increase productivity.",
+      name: t("testimonials.reviews.3.name"),
+      role: t("testimonials.reviews.3.role"),
+      review: t("testimonials.reviews.3.text"),
       rating: 3.5,
     },
   ];
 
   useEffect(() => {
-    // Parse Facebook embeds after render
     if (window.FB) {
       window.FB.XFBML.parse();
     }
-  }, []);
+  }, [t]); // re-parse when language changes
 
   return (
     <div className="testimonials-page">
@@ -57,17 +55,14 @@ export default function Testimonials() {
       >
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <h1>Testimonials</h1>
-          <p>
-            Here are some quotes from professionals in the farming industry. 80%
-            of these farmers would recommend our services to others.
-          </p>
+          <h1>{t("testimonials.heroTitle")}</h1>
+          <p>{t("testimonials.heroDescription")}</p>
         </div>
       </section>
 
       {/* FACEBOOK REELS */}
       <section className="videos-section">
-        <h2>Customer Video Testimonials</h2>
+        <h2>{t("testimonials.videoSectionTitle")}</h2>
 
         <div className="video-grid">
           {reels.map((url, index) => (
@@ -85,7 +80,7 @@ export default function Testimonials() {
 
       {/* WRITTEN REVIEWS */}
       <section className="reviews-section">
-        <h2>What People Say</h2>
+        <h2>{t("testimonials.reviewsSectionTitle")}</h2>
 
         <div className="reviews-grid">
           {reviews.map((r, i) => (
