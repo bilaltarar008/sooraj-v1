@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import products from "../data/products";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import "../styles/products.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,35 +11,28 @@ export default function Products() {
   const lang = i18n.language === "ur" ? "ur" : "en";
 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [expandedProduct, setExpandedProduct] = useState(null);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
 
-  /* ======================================================
-   🔼 SCROLL TO EXTREME TOP ON PAGE OPEN / REFRESH
-====================================================== */
+  /* ===========================
+     Scroll to top on load
+  ============================ */
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  /* ======================================================
-   🔼 SCROLL TO EXTREME TOP ON PAGINATION CHANGE
-====================================================== */
+  /* ===========================
+     Scroll to top on page change
+  ============================ */
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-  // FINAL FIXED CATEGORY LIST (NO DUPLICATES + TRANSLATIONS)
+  /* ===========================
+     Categories (Translated)
+  ============================ */
   const categories = [
     t("product.all", "All"),
     ...new Set(
@@ -47,18 +40,20 @@ export default function Products() {
     ),
   ];
 
-  // Filter products by selected category
+  /* ===========================
+     Filter products
+  ============================ */
   const filteredProducts =
     selectedCategory === t("product.all", "All")
       ? products
       : products.filter((p) => {
           const cat = p.category?.[lang] || p.category?.en;
-          return (
-            cat?.toString().toLowerCase() === selectedCategory.toLowerCase()
-          );
+          return cat?.toLowerCase() === selectedCategory.toLowerCase();
         });
 
-  // Calculate pagination
+  /* ===========================
+     Pagination logic
+  ============================ */
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -67,45 +62,37 @@ export default function Products() {
     indexOfLastProduct
   );
 
-  // Pagination function
-  const paginate = (pageNumber) => {
-    if (pageNumber < 1 || pageNumber > totalPages) return;
-    setCurrentPage(pageNumber);
+  const paginate = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
   };
 
-  // Toggle "Read More / Hide Details"
-  const toggleDetails = (id) => {
-    setExpandedProduct(expandedProduct === id ? null : id);
+  /* ===========================
+     Navigate to product detail
+  ============================ */
+  const goToProductDetail = (product) => {
+    navigate(`/products/${product.id}`, {
+      state: {
+        product,
+        lang,
+      },
+    });
   };
-
-  /* ======================================================
-     ❌ DISABLED: Scroll to product grid on page/category change
-  ====================================================== */
-  /*
-  useEffect(() => {
-    const productGrid = document.querySelector(".product-grid");
-    if (productGrid) {
-      const offsetTop =
-        productGrid.getBoundingClientRect().top + window.scrollY - 20;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
-    }
-  }, [currentPage, selectedCategory]);
-  */
 
   return (
     <div className="products-container">
-      <h1 className="page-title">{t("product.title") || "Products"}</h1>
+      <h1 className="page-title">{t("product.title", "Products")}</h1>
 
       {/* CATEGORY BUTTONS */}
       <div className="category-buttons">
         {categories.map((category, index) => (
           <button
             key={index}
+            className={selectedCategory === category ? "active" : ""}
             onClick={() => {
               setSelectedCategory(category);
               setCurrentPage(1);
             }}
-            className={selectedCategory === category ? "active" : ""}
           >
             {category}
           </button>
@@ -114,90 +101,66 @@ export default function Products() {
 
       {/* PRODUCT GRID */}
       <div className="product-grid">
-        {currentProducts.map((p) => {
-          const isExpanded = expandedProduct === p.id;
+        {currentProducts.map((p) => (
+          <motion.div
+            key={p.id}
+            className="product-card"
+            whileHover={{ scale: 1.03 }}
+            onClick={() => goToProductDetail(p)}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              src={p.image}
+              alt={p.name?.[lang] || p.name?.en}
+              className="product-image"
+            />
 
-          return (
-            <motion.div
-              key={p.id}
-              className="product-card"
-              onClick={() => navigate(`/products/${p.id}`)}
-              style={{ cursor: "pointer" }}
+            <h3 className="product-name">{p.name?.[lang] || p.name?.en}</h3>
+
+            <div className="product-info">
+              <p>{p.chemical?.[lang] || p.chemical?.en}</p>
+              <p>
+                <strong>{t("product.pack", "Pack Size")}:</strong>{" "}
+                {p.packSize?.[lang] || p.packSize?.en}
+              </p>
+            </div>
+
+            {/* READ MORE BUTTON */}
+            <button
+              className="read-more-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                goToProductDetail(p);
+              }}
             >
-              <img
-                src={p.image}
-                alt={p.name?.[lang] || p.name?.en}
-                className="product-image"
-              />
-
-              <h3 className="product-name">{p.name?.[lang] || p.name?.en}</h3>
-
-              <div className="product-info">
-                <p>{p.chemical?.[lang] || p.chemical?.en}</p>
-                <p>
-                  <strong>{t("product.pack", "Pack Size")}:</strong>{" "}
-                  {p.packSize?.[lang] || p.packSize?.en}
-                </p>
-              </div>
-
-              <button
-                className="read-more-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleDetails(p.id);
-                }}
-              >
-                {isExpanded
-                  ? t("product.hideDetails", "Hide Details")
-                  : t("product.readMore", "Read more")}
-              </button>
-
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.ul
-                    className="product-details"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                  >
-                    {p.details?.[lang]?.length > 0 ? (
-                      p.details[lang].map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))
-                    ) : (
-                      <li>{t("product.noDetails", "No details available")}</li>
-                    )}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+              {t("product.readMore", "Read more")}
+            </button>
+          </motion.div>
+        ))}
       </div>
 
       {/* PAGINATION */}
       <div className="pagination">
         <button
-          onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
+          onClick={() => paginate(currentPage - 1)}
         >
           Prev
         </button>
 
-        {[...Array(totalPages)].map((_, idx) => (
+        {[...Array(totalPages)].map((_, index) => (
           <button
-            key={idx}
-            onClick={() => paginate(idx + 1)}
-            className={currentPage === idx + 1 ? "active-page" : ""}
+            key={index}
+            className={currentPage === index + 1 ? "active-page" : ""}
+            onClick={() => paginate(index + 1)}
           >
-            {idx + 1}
+            {index + 1}
           </button>
         ))}
 
         <button
-          onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
+          onClick={() => paginate(currentPage + 1)}
         >
           Next
         </button>
