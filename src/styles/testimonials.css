@@ -1,6 +1,10 @@
-/* ============================= */
+.testimonials-page {
+  background: #f7fdf7;
+  font-family: "Poppins", sans-serif;
+  color: #1a4d2e;
+}
+
 /* HERO SECTION */
-/* ============================= */
 .testimonials-hero {
   position: relative;
   height: 350px;
@@ -10,84 +14,70 @@
   color: #fff;
   text-align: center;
   padding: 0 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
 .hero-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 77, 46, 0.5); /* green overlay */
+  inset: 0;
+  background: rgba(0, 77, 46, 0.5);
 }
-
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 900px;
 }
-
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  color: #e7f3ed; /* light green/white text */
+  color: #ffffff;
 }
-
 .hero-content p {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #f0fff0;
+  color: #f9fff9;
 }
 
-/* ============================= */
 /* VIDEOS GRID */
-/* ============================= */
 .videos-section {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
-
 .videos-section h2 {
   text-align: center;
-  color: #0b7e39; /* dark green */
+  color: #0b7e39;
   font-size: 2rem;
   margin-bottom: 30px;
 }
-
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(280px, 1fr)
-  ); /* slightly bigger */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px; /* reduced gap */
   justify-items: center;
 }
-
 .video-card {
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .video-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.15),
     0 0 15px 5px rgba(11, 126, 57, 0.25);
 }
-
 .video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 177.78%;
+  padding-bottom: 56.25%; /* 16:9 ratio */
   height: 0;
   overflow: hidden;
 }
-
 .video-wrapper iframe {
   position: absolute;
   top: 0;
@@ -97,41 +87,33 @@
   border: none;
 }
 
-.video-info {
-  padding: 12px 15px;
-  text-align: center;
-}
-
-.video-info h3 {
-  font-size: 1rem;
-  color: #0b7e39;
-  margin: 0;
-}
-
-/* ============================= */
 /* MODAL VIDEO */
-/* ============================= */
 .video-modal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 650px; /* slightly bigger modal */
-  background: #0b7e39; /* green modal background */
+  width: 95%;
+  max-width: 720px;
+  background: #0b7e39;
   padding: 1rem;
   border-radius: 14px;
   outline: none;
 }
-
 .modal-wrapper {
-  padding-bottom: 177.78%;
+  padding-bottom: 56.25%; /* 16:9 ratio */
+  position: relative;
 }
-
+.modal-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .video-overlay {
   background-color: rgba(0, 0, 0, 0.8);
 }
-
 .modal-close {
   position: absolute;
   top: 10px;
@@ -143,107 +125,111 @@
   cursor: pointer;
 }
 
-/* ============================= */
 /* WRITTEN REVIEWS */
-/* ============================= */
 .reviews-section {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 20px;
 }
-
 .reviews-section h2 {
   text-align: center;
   font-size: 2rem;
   color: #0b7e39;
   margin-bottom: 30px;
 }
-
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(260px, 1fr)
-  ); /* slightly bigger cards */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
 }
 
-.review-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  border-top: 4px solid #0b7e39; /* green accent */
+/* REVIEW CARD WITH GREEN TOP BORDER */
+.review-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
+.review-card {
+  position: relative;
+  background: #ffffff;
+  padding: 25px 20px 20px 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-top: 6px solid #0b7e39; /* green top border */
+  text-align: center;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 77, 46, 0.2);
+}
+
+/* STAR RATING INSIDE CARD */
+.review-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 6px; /* reduced space below stars */
+}
+.star {
+  font-size: 2rem;
+  position: relative;
+  display: inline-block;
+  color: #ccc; /* default unfilled */
+}
+
+.star.filled {
+  color: #ffd700; /* yellow for full star */
+}
+
+.star.unfilled {
+  color: #ccc;
+}
+
+.star.half {
+  color: #ccc; /* background star gray */
+}
+
+.star.half .half-filled {
+  color: #ffd700;
+  position: absolute;
+  overflow: hidden;
+  width: 50%; /* half star width */
+  left: 0;
+  top: 0;
+}
+
+.star.half .half-empty {
+  color: #ccc;
+}
+
+/* REVIEW TEXT */
 .review-text {
   font-style: italic;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0 0 6px 0; /* reduced bottom margin */
 }
-
 .reviewer-name {
   font-weight: 700;
   color: #0b7e39;
-  margin: 0;
+  margin: 0 0 2px 0; /* reduced margin below name */
 }
-
 .reviewer-role {
   font-size: 0.88rem;
   color: #555;
+  margin: 0; /* remove extra spacing */
 }
 
-/* ============================= */
 /* RESPONSIVE */
-/* ============================= */
 @media (max-width: 768px) {
   .video-grid,
   .reviews-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-}
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(320px, 1fr)
-  ); /* slightly bigger */
-  gap: 20px;
-  justify-items: center;
-}
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 177.78%; /* keeps 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Make modal a bit bigger too */
-.video-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 95%;
-  max-width: 720px; /* bigger modal for bigger videos */
-  background: #0b7e39;
-  padding: 1rem;
-  border-radius: 14px;
-  outline: none;
-}
-
-.modal-wrapper {
-  padding-bottom: 177.78%;
+  .star {
+    font-size: 1.7rem; /* smaller on mobile but still big */
+  }
 }
