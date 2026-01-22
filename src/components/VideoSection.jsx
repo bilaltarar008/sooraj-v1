@@ -78,7 +78,7 @@ export default function VideoSection() {
     },
     { 
       link: "https://www.youtube.com/watch?v=t_VMUQRCVZc",
-      title: t("video2Title"),
+      title: t("video2Title"),   
       thumbnail: "/thumbnails/main-banner2.jpg" // Custom thumbnail
     },
     { 
