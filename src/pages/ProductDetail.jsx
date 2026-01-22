@@ -16,7 +16,7 @@ export default function ProductDetail() {
   const product = products.find((p) => p.id === parseInt(id));
 
   if (!product) {
-    return <p>{t("product.notFound") || "Product not found"}</p>;
+    return <p>{t("product.notFound", "Product not found")}</p>;
   }
 
   return (
@@ -26,17 +26,14 @@ export default function ProductDetail() {
         <button
           className="pd-back"
           onClick={() => navigate(-1)}
-          style={{
-            borderRadius: "30px",
-            padding: "10px 22px",
-          }}
+          style={{ borderRadius: "30px", padding: "10px 22px" }}
         >
           {t("product.backToProducts", "Back to Products")}
         </button>
 
         {/* TOP SECTION */}
         <div className="pd-top-section">
-          {/* IMAGE (ALWAYS LTR) */}
+          {/* LEFT COLUMN */}
           <div className="pd-image-wrapper">
             <img
               src={product.image}
@@ -45,7 +42,7 @@ export default function ProductDetail() {
             />
           </div>
 
-          {/* INFO (TEXT ONLY RTL) */}
+          {/* RIGHT COLUMN */}
           <div className={`pd-info-wrapper ${isUrdu ? "urdu-text" : ""}`}>
             <h1 className="pd-title">
               {product.name?.[lang] || product.name?.en}
@@ -71,10 +68,22 @@ export default function ProductDetail() {
               )}
             </div>
 
-            {/* COMPOSITION */}
+            {/* PRODUCT DETAILS */}
+            {product.details?.[lang]?.length > 0 && (
+              <div className="pd-section-card">
+                <h3>{t("product.details", "Product Details")}</h3>
+                <ul>
+                  {product.details[lang].map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* COMPOSITION / INGREDIENTS */}
             {product.composition?.length > 0 && (
               <div className="pd-section-card">
-                <h3>{t("product.composition", "Composition")}</h3>
+                <h3>{t("product.composition", "Composition / Ingredients")}</h3>
                 <ul>
                   {product.composition.map((item, idx) => (
                     <li key={idx}>{item?.[lang] || item?.en}</li>
@@ -82,19 +91,19 @@ export default function ProductDetail() {
                 </ul>
               </div>
             )}
-
-            {/* CROPS */}
-            {product.crops && (
-              <div className="pd-section-card">
-                <h3>{t("product.crops", "Crops")}</h3>
-                <p>{product.crops?.[lang] || product.crops?.en}</p>
-              </div>
-            )}
           </div>
         </div>
 
         {/* GREEN SECTION */}
         <div className={`pd-green-section ${isUrdu ? "urdu-text" : ""}`}>
+          {/* CROPS / TARGETED PLANTS */}
+          {product.crops && (
+            <div className="pd-section-card pd-span-two">
+              <h3>{t("product.crops", "Crops / Targeted Plants")}</h3>
+              <p>{product.crops?.[lang] || product.crops?.en}</p>
+            </div>
+          )}
+
           {product.usage && (
             <div className="pd-section-card">
               <h3>{t("product.usage", "Usage Instructions")}</h3>
@@ -112,14 +121,14 @@ export default function ProductDetail() {
 
           {product.season && (
             <div className="pd-section-card">
-              <h3>{t("product.season", "Season")}</h3>
+              <h3>{t("product.season", "Season / Timing")}</h3>
               <p>{product.season?.[lang] || product.season?.en}</p>
             </div>
           )}
 
           {product.problems && (
             <div className="pd-section-card">
-              <h3>{t("product.problems", "Problems Controlled")}</h3>
+              <h3>{t("product.problems", "Pest / Problem Control")}</h3>
               <p>{product.problems?.[lang] || product.problems?.en}</p>
             </div>
           )}

@@ -17,6 +17,7 @@ export default function Navbar({ search, setSearch }) {
     { key: "About", path: "/about" },
     { key: "Products", path: "/products" },
     { key: "Contact", path: "/contact" },
+    { key: "Testimonials", path: "/testimonials" },
     { key: "Career", path: "/career" },
   ];
 
