@@ -70,7 +70,7 @@ export const crops = [
     id: 10,
     name: "Vegetables",
     image: Vegetables,
-    description: "sugar cane are rich, filling, and versatile."
+    description: "sugar cane are rich, filling and versatile."
   },
 ];
 
