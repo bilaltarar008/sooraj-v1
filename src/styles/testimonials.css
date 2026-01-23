@@ -40,24 +40,24 @@
 }
 
 /* VIDEOS GRID */
-.videos-section {
+.test-videos-section  {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
-.videos-section h2 {
+.test-videos-section  h2 {
   text-align: center;
   color: #0b7e39;
   font-size: 2rem;
   margin-bottom: 30px;
 }
-.video-grid {
+.test-video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 15px; /* reduced gap */
   justify-items: center;
 }
-.video-card {
+.test-video-card  {
   background: #fff;
   border-radius: 14px;
   overflow: hidden;

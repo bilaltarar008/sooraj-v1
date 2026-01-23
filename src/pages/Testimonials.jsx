@@ -61,12 +61,12 @@ export default function Testimonials() {
       </section>
 
       {/* FACEBOOK REELS */}
-      <section className="videos-section">
+      <section className="test-videos-section">
         <h2>{t("testimonials.videoSectionTitle")}</h2>
 
-        <div className="video-grid">
+        <div className="test-video-grid">
           {reels.map((url, index) => (
-            <div key={index} className="video-card">
+            <div key={index} className="test-video-card">
               <div
                 className="fb-video"
                 data-href={url}
