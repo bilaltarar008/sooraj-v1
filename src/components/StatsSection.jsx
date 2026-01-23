@@ -124,10 +124,10 @@ export default function StatsSection() {
   const isUrdu = i18n.language === "ur";
 
   const stats = [
-    { label: t("stats.members"), target: 1200, icon: "users" },
-    { label: t("stats.projects"), target: 85, icon: "projects" },
-    { label: t("stats.clients"), target: 240, icon: "clients" },
-    { label: t("stats.awards"), target: 15, icon: "awards" },
+    { label: t("stats.members"), target: 15, icon: "users" },
+    { label: t("stats.projects"), target: 3500, icon: "projects" },
+    { label: t("stats.clients"), target: 5000, icon: "clients" },
+    { label: t("stats.awards"), target: 25, icon: "awards" },
   ];
 
   return (
