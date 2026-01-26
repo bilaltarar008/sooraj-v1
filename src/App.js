@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ScrollToTop from "./components/ScrollToTop";
+import ChatWidget from "./components/chatbot/ChatWidget";
 import {
   BrowserRouter as Router,
   Routes,
@@ -101,6 +102,7 @@ export default function App() {
 
         <TopHeader />
 
+        <ChatWidget />
         <Navbar
           isOpen={isOpen}
           setIsOpen={setIsOpen}
