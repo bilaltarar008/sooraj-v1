@@ -1,22 +1,9 @@
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 
 import aboutBanner from "../assets/aboutbanner.jpg";
 import aboutSideImage from "../assets/main-banner2.jpg";
-/* Fix leaflet marker icons */
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-});
 
 export default function About() {
   const navigate = useNavigate();
@@ -158,7 +145,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ================= DEALER MAP ================= */}
+      {/* ================= DEALER MAP (UPDATED) ================= */}
       <section style={{ padding: "70px 10%" }}>
         <h2
           style={{
@@ -172,28 +159,15 @@ export default function About() {
         </h2>
 
         <div style={{ height: 420, borderRadius: 18, overflow: "hidden" }}>
-          <MapContainer
-            center={[30.3753, 69.3451]}
-            zoom={6}
-            style={{ height: "100%" }}
-          >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-            {dealers.map((d, i) => (
-              <Marker key={i} position={d.coords}>
-                <Popup>
-                  <strong>{d.name}</strong>
-                  <br />
-                  <span
-                    style={{ color: "#127a3a", cursor: "pointer" }}
-                    onClick={() => navigate("/contact")}
-                  >
-                    {t("about.contactDealer")}
-                  </span>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
+          <iframe
+            title="Sooraj Crop Sciences Dealers"
+            src="https://www.google.com/maps/d/embed?mid=1P0dq6bYal1QMZXeBMt6Cqr0wGAFW9VM"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </section>
 
@@ -321,14 +295,4 @@ const services = [
       </svg>
     ),
   },
-];
-
-const dealers = [
-  { name: "Lahore Dealer", coords: [31.5204, 74.3587] },
-  { name: "Karachi Dealer", coords: [24.8607, 67.0011] },
-  { name: "Islamabad Dealer", coords: [33.6844, 73.0479] },
-  { name: "Faisalabad Dealer", coords: [31.4504, 73.135] },
-  { name: "Gujranwala Dealer", coords: [32.1877, 74.1945] },
-  { name: "Sialkot Dealer", coords: [32.4945, 74.5229] },
-  { name: "Daska Dealer", coords: [32.3244, 74.3539] },
 ];
