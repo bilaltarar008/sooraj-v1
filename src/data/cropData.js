@@ -5,7 +5,8 @@ import maize from "../assets/crops/maize.jpg";
 import potato from "../assets/crops/potato.jpg";
 import Strawberry from "../assets/crops/Strawberry.jpg"
 import wheatPopup from "../assets/crops/wheat-popup.jpeg"
-
+import ricePopup from "../assets/crops/rice-popup.jpeg"
+import Maizepopup from "../assets/crops/maize-popup.jpeg"
 import Citrus from "../assets/crops/Citrus.jpg";
 import Patato from "../assets/crops/alooPopup.jpeg";
 import Sugarcanepop from "../assets/crops/vegetable-popup.jpeg"
@@ -18,6 +19,7 @@ export const crops = [
     id: 2,
     name: "Rice",
     image: rice,
+    popupImage: ricePopup,
     description: "Rice feeds more than half the world."
   },
   {
@@ -32,6 +34,7 @@ export const crops = [
     id: 4,
     name: "Maize",
     image: maize,
+    popupImage:  Maizepopup,
     description: "Maize is a global food & feed crop."
   },
   {

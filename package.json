@@ -12,6 +12,7 @@
     "ajv-keywords": "^3.5.2",
     "firebase": "^12.8.0",
     "framer-motion": "^12.23.26",
+    "franc-min": "^6.2.0",
     "i18next": "^25.7.3",
     "leaflet": "^1.9.4",
     "react": "^19.2.3",
