@@ -5,77 +5,88 @@ import MessageBubble from "./MessageBubble";
 import "./chatbot.css";
 
 const ChatWindow = ({ onClose }) => {
-  const [messages, setMessages] = useState([
-    {
-      sender: "bot",
-      text: "السلام علیکم! آپ اپنا سوال اردو، انگریزی یا پنجابی میں پوچھ سکتے ہیں۔",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const [input, setInput] = useState("");
 
-  const detectLanguage = (text) => {
-    const urduRegex = /[\u0600-\u06FF]/;
-  
-    if (urduRegex.test(text)) {
-      return "ur";
-    }
-  
-    return "en";
-  };
-
   const [direction, setDirection] = useState("rtl");
 
-  
   const messagesEndRef = useRef(null);
 
-useEffect(() => {
-  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [messages]);
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  // Fetch initial greeting from backend when chat opens
+  useEffect(() => {
+    const fetchGreeting = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
+          method: "POST",
+          body: new FormData(), // sending empty message
+        });
+        const data = await response.json();
+        setMessages([{ sender: "bot", text: data.reply }]);
+      } catch (err) {
+        setMessages([
+          {
+            sender: "bot",
+            text: "السلام علیکم! آپ اپنا سوال پوچھ سکتے ہیں۔",
+          },
+        ]);
+      }
+    };
+
+    fetchGreeting();
+  }, []); // runs once when component mounts
 
   const [isTyping, setIsTyping] = useState(false);
 
   const handleTypingDirection = (text) => {
     const urduRegex = /[\u0600-\u06FF]/;
-  
+
     if (urduRegex.test(text)) {
       setDirection("rtl");
     } else {
       setDirection("ltr");
     }
   };
-  
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
 
-    // User message (any language allowed)
-    const userMessage = { sender: "user", text: input };
+    const userText = input;
 
-    setMessages((prev) => [...prev, userMessage]);
+    // 1️⃣ Add user message
+    setMessages((prev) => [...prev, { sender: "user", text: userText }]);
     setInput("");
     setIsTyping(true);
 
-    // Dummy Urdu-only bot reply (AI later)
-    setTimeout(() => {
-        const lang = detectLanguage(input);
-      
-        const botReply =
-          lang === "ur"
-            ? "میں آپ کی بات سمجھنے کی کوشش کر رہا ہوں۔ براہِ کرم فصل یا مسئلہ واضح کریں۔"
-            : "I am trying to understand your query. Please mention the crop or the problem clearly.";
-      
-        setMessages((prev) => [
-          ...prev,
-          {
-            sender: "bot",
-            text: botReply,
-          },
-        ]);
-      
-        setIsTyping(false);
-      }, 1000);
-      
+    try {
+      // 2️⃣ Send message to backend
+      const formData = new FormData();
+      formData.append("message", userText);
+
+      const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      // 3️⃣ Show backend reply
+      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: "معاف کریں، سرور سے رابطہ نہیں ہو سکا۔",
+        },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (
@@ -93,24 +104,21 @@ useEffect(() => {
         {isTyping && (
           <MessageBubble sender="bot" text="جواب تیار ہو رہا ہے..." />
         )}
-            <div ref={messagesEndRef} />
+        <div ref={messagesEndRef} />
       </div>
 
-  
-
-
       <div className="chatbot-input">
-      <input
-  type="text"
-  placeholder="اپنا سوال یہاں لکھیں..."
-  value={input}
-  style={{ direction: direction }}
-  onChange={(e) => {
-    setInput(e.target.value);
-    handleTypingDirection(e.target.value);
-  }}
-  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-/>
+        <input
+          type="text"
+          placeholder="اپنا سوال یہاں لکھیں..."
+          value={input}
+          style={{ direction: direction }}
+          onChange={(e) => {
+            setInput(e.target.value);
+            handleTypingDirection(e.target.value);
+          }}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+        />
 
         <button onClick={sendMessage}>بھیجیں</button>
       </div>
