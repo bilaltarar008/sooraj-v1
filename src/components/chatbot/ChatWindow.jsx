@@ -27,10 +27,10 @@ const ChatWindow = ({ onClose }) => {
   };
 
   // Detect language locally (optional, for your frontend logic)
-  const detectLanguage = (text) => {
-    const urduRegex = /[\u0600-\u06FF]/;
-    return urduRegex.test(text) ? "ur" : "en";
-  };
+  // const detectLanguage = (text) => {
+  //   const urduRegex = /[\u0600-\u06FF]/;
+  //   return urduRegex.test(text) ? "ur" : "en";
+  // };
 
   // ---- Send user message to backend ----
   const sendMessageToBackend = async (message) => {
@@ -46,7 +46,7 @@ const ChatWindow = ({ onClose }) => {
       // Prepare form data for POST request
       const formData = new FormData();
       formData.append("message", message);
-      const apiUrl = process.env.REACT_APP_API_URL;
+      // const apiUrl = process.env.REACT_APP_API_URL;
       // Call your FastAPI backend
       const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
         method: "POST",
