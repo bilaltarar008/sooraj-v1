@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useRef, useEffect } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
 import MessageBubble from "./MessageBubble";
 import "./chatbot.css";
 
@@ -13,69 +11,76 @@ const ChatWindow = ({ onClose }) => {
   ]);
 
   const [input, setInput] = useState("");
-
-  const detectLanguage = (text) => {
-    const urduRegex = /[\u0600-\u06FF]/;
-  
-    if (urduRegex.test(text)) {
-      return "ur";
-    }
-  
-    return "en";
-  };
-
   const [direction, setDirection] = useState("rtl");
-
-  
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-useEffect(() => {
-  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [messages]);
+  // Scroll to bottom when messages update
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  const [isTyping, setIsTyping] = useState(false);
-
+  // Handle typing direction for input field
   const handleTypingDirection = (text) => {
     const urduRegex = /[\u0600-\u06FF]/;
-  
-    if (urduRegex.test(text)) {
-      setDirection("rtl");
-    } else {
-      setDirection("ltr");
-    }
+    setDirection(urduRegex.test(text) ? "rtl" : "ltr");
   };
-  
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+  // Detect language locally (optional, for your frontend logic)
+  const detectLanguage = (text) => {
+    const urduRegex = /[\u0600-\u06FF]/;
+    return urduRegex.test(text) ? "ur" : "en";
+  };
 
-    // User message (any language allowed)
-    const userMessage = { sender: "user", text: input };
+  // ---- Send user message to backend ----
+  const sendMessageToBackend = async (message) => {
+    if (!message.trim()) return;
 
-    setMessages((prev) => [...prev, userMessage]);
+    // Add user's message to chat
+    setMessages((prev) => [...prev, { sender: "user", text: message }]);
+    handleTypingDirection(message);
     setInput("");
     setIsTyping(true);
 
-    // Dummy Urdu-only bot reply (AI later)
-    setTimeout(() => {
-        const lang = detectLanguage(input);
-      
-        const botReply =
-          lang === "ur"
-            ? "میں آپ کی بات سمجھنے کی کوشش کر رہا ہوں۔ براہِ کرم فصل یا مسئلہ واضح کریں۔"
-            : "I am trying to understand your query. Please mention the crop or the problem clearly.";
-      
+    try {
+      // Prepare form data for POST request
+      const formData = new FormData();
+      formData.append("message", message);
+      const apiUrl = process.env.REACT_APP_API_URL;
+      // Call your FastAPI backend
+      const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Backend API error");
+
+      const data = await response.json();
+
+      if (data.reply) {
+        // Add backend's reply to chat
+        setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+      } else {
         setMessages((prev) => [
           ...prev,
-          {
-            sender: "bot",
-            text: botReply,
-          },
+          { sender: "bot", text: "⚠️ کوئی جواب نہیں ملا۔" },
         ]);
-      
-        setIsTyping(false);
-      }, 1000);
-      
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "⚠️ سرور سے رابطہ نہیں ہو سکا۔" },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  // Triggered when user presses Enter or clicks Send
+  const sendMessage = () => {
+    if (!input.trim()) return;
+    sendMessageToBackend(input);
   };
 
   return (
@@ -89,29 +94,22 @@ useEffect(() => {
         {messages.map((msg, index) => (
           <MessageBubble key={index} sender={msg.sender} text={msg.text} />
         ))}
-
-        {isTyping && (
-          <MessageBubble sender="bot" text="جواب تیار ہو رہا ہے..." />
-        )}
-            <div ref={messagesEndRef} />
+        {isTyping && <MessageBubble sender="bot" text="⏳ جواب آ رہا ہے..." />}
+        <div ref={messagesEndRef} />
       </div>
 
-  
-
-
       <div className="chatbot-input">
-      <input
-  type="text"
-  placeholder="اپنا سوال یہاں لکھیں..."
-  value={input}
-  style={{ direction: direction }}
-  onChange={(e) => {
-    setInput(e.target.value);
-    handleTypingDirection(e.target.value);
-  }}
-  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-/>
-
+        <input
+          type="text"
+          placeholder="اپنا سوال یہاں لکھیں..."
+          value={input}
+          style={{ direction }}
+          onChange={(e) => {
+            setInput(e.target.value);
+            handleTypingDirection(e.target.value);
+          }}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+        />
         <button onClick={sendMessage}>بھیجیں</button>
       </div>
     </div>
