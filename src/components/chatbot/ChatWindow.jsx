@@ -45,13 +45,14 @@ const ChatWindow = ({ onClose }) => {
     try {
       // Prepare form data for POST request
       const formData = new FormData();
-      formData.append("message", message);
+formData.append("message", message);
       // const apiUrl = process.env.REACT_APP_API_URL;
       // Call your FastAPI backend
-      const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
-        method: "POST",
-        body: formData,
-      });
+  const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
+  method: "POST",
+  body: formData,
+});
+
 
       if (!response.ok) throw new Error("Backend API error");
 
