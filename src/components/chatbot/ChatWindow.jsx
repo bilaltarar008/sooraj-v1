@@ -230,10 +230,13 @@ const ChatWindow = ({ onClose }) => {
     formData.append("file", file);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chat/voice", {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+  "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+  {
+    method: "POST",
+    body: formData,
+  }
+);
 
       const data = await res.json();
 
