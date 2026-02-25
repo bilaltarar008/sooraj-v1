@@ -217,42 +217,48 @@ const ChatWindow = ({ onClose }) => {
 
   /* 🎙️ Voice Message */
   const sendVoiceMessage = async (file) => {
-    const audioURL = URL.createObjectURL(file);
+  const audioURL = URL.createObjectURL(file);
+
+  setMessages((prev) => [
+    ...prev,
+    { sender: "user", audio: audioURL },
+  ]);
+
+  setIsTyping(true);
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const res = await fetch(
+      "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const blob = await res.blob();   // ✅ get audio
+    const botAudioURL = URL.createObjectURL(blob);
 
     setMessages((prev) => [
       ...prev,
-      { sender: "user", audio: audioURL },
+      { sender: "bot", audio: botAudioURL },
     ]);
 
-    setIsTyping(true);
+    // 🔊 auto play
+    const audio = new Audio(botAudioURL);
+    audio.play();
 
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const res = await fetch(
-  "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-  {
-    method: "POST",
-    body: formData,
+  } catch {
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+    ]);
   }
-);
 
-      const data = await res.json();
-
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: data.reply },
-      ]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
-      ]);
-    }
-
-    setIsTyping(false);
-  };
+  setIsTyping(false);
+};
 
   return (
     <div className="chatbot-window">
