@@ -194,7 +194,7 @@ const ChatWindow = ({ onClose }) => {
     formData.append("message", userMsg);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chat/text", {
+      const res = await fetch("https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/text", {
         method: "POST",
         body: formData,
       });
