@@ -61,7 +61,7 @@ export default function TopHeader() {
         >
           <MdEmail size={16} />
           <a
-            href="mailto:Soorajcropscience@gmail.com"
+            href="mailto:Soorajcropsciences@gmail.com"
             style={{
               color: "white",
               textDecoration: "none",
@@ -71,7 +71,7 @@ export default function TopHeader() {
               whiteSpace: "nowrap",
             }}
           >
-            SoorajCropScience@gmail.com
+            SoorajCropSciences@gmail.com
           </a>
         </div>
 

@@ -131,10 +131,10 @@
 
     "jobs": {
       "1": {
-        "title": "Field Agronomist",
-        "desc": "We’re looking for an agronomist to support farmers with crop guidance and field visits.",
-        "type1": "On-field",
-        "type2": "Full-time"
+        "title": "Area Manager",
+    "desc": "We’re looking for a manager to oversee operations and coordinate with teams across the region.",
+    "type1": "On-field",
+    "type2": "Full-time"
       },
       "2": {
         "title": "Crop Protection Specialist",
@@ -143,10 +143,10 @@
         "type2": "Full-time"
       },
       "3": {
-        "title": "Farm Outreach Coordinator",
-        "desc": "Connect with farmers, organize events, and spread awareness about our products.",
-        "type1": "Hybrid",
-        "type2": "Full-time"
+        "title": "Marketing Coordinator",
+    "desc": "We’re looking for a coordinator to plan and execute marketing campaigns and support the sales team.",
+    "type1": "Office / On-field",
+    "type2": "Full-time"
       }
     }
   },

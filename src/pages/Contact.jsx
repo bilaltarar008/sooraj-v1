@@ -224,7 +224,7 @@ function ContactInfo() {
       </div>
 
       <div style={{ padding: "30px", display: "flex", flexDirection: "column", gap: "18px" }}>
-        <Info icon={<FaEnvelope />} title={t("contact.emailLabel")} value="SoorajCropScience@gmail.com" link="mailto:SoorajCropScience@gmail.com" />
+        <Info icon={<FaEnvelope />} title={t("contact.emailLabel")} value="SoorajCropSciences@gmail.com" link="mailto:SoorajCropScience@gmail.com" />
         <Info icon={<FaWhatsapp />} title={t("contact.whatsapp")} value={t("contact.chatNow")} link="https://wa.me/924235111003" />
         <Info icon={<FaPhone />} title={t("contact.phone")} value="04235111003" link="tel:04235111003" />
         <Info icon={<FaMapMarkerAlt />} title={t("contact.office")} value={t("contact.address")} />
