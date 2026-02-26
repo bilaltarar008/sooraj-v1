@@ -364,7 +364,9 @@ const ChatWindow = ({ onClose }) => {
       audioRef.current.currentTime = 0;
     }
 
-    const audio = new Audio(`http://127.0.0.1:8000${url}`);
+    // const audio = new Audio(`http://127.0.0.1:8000${url}`);
+    const BACKEND = "https://sooraj-ai-598501827987.asia-south1.run.app";
+    const audio = new Audio(`${BACKEND}${url}`);
     audioRef.current = audio;
     setCurrentAudio(audio);
     audio.play();
