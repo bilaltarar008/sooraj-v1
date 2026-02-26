@@ -2,135 +2,308 @@
 // import MessageBubble from "./MessageBubble";
 // import "./chatbot.css";
 
+// /* 🎙️ Voice Recorder */
+// // const VoiceRecorder = ({ onSend }) => {
+// //   const [recording, setRecording] = useState(false);
+// //   const mediaRecorderRef = useRef(null);
+// //   const chunksRef = useRef([]);
+
+// //   const startRecording = async () => {
+// //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+// //     const recorder = new MediaRecorder(stream);
+// //     mediaRecorderRef.current = recorder;
+// //     chunksRef.current = [];
+
+// //     recorder.ondataavailable = (e) => {
+// //       if (e.data.size > 0) chunksRef.current.push(e.data);
+// //     };
+
+// //     recorder.onstop = () => {
+// //       const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+// //       const file = new File([blob], "voice.webm");
+// //       onSend(file);
+// //     };
+
+// //     recorder.start();
+// //     setRecording(true);
+// //   };
+
+// //   const stopRecording = () => {
+// //     mediaRecorderRef.current.stop();
+// //     setRecording(false);
+// //   };
+
+// //   return (
+// //     <button
+// //       className={`voice-btn ${recording ? "recording" : ""}`}
+// //       onClick={recording ? stopRecording : startRecording}
+// //     >
+// //       🎤
+// //     </button>
+// //   );
+// // };
+// const VoiceRecorder = ({ onSend }) => {
+//   const [recording, setRecording] = useState(false);
+//   const mediaRecorderRef = useRef(null);
+//   const chunksRef = useRef([]);
+//   const streamRef = useRef(null);
+
+//   useEffect(() => {
+//     return () => {
+//       streamRef.current?.getTracks().forEach((t) => t.stop());
+//     };
+//   }, []);
+
+//   const startRecording = async () => {
+//     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+//     streamRef.current = stream;
+
+//     const recorder = new MediaRecorder(stream);
+//     mediaRecorderRef.current = recorder;
+//     chunksRef.current = [];
+
+//     recorder.ondataavailable = (e) => {
+//       if (e.data.size > 0) chunksRef.current.push(e.data);
+//     };
+
+//     recorder.onstop = () => {
+//       const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+//       const file = new File([blob], "voice.webm");
+//       onSend(file);
+//     };
+
+//     recorder.start();
+//     setRecording(true);
+//   };
+
+//   const stopRecording = () => {
+//     mediaRecorderRef.current?.stop();
+//     streamRef.current?.getTracks().forEach((track) => track.stop());
+//     streamRef.current = null;
+//     setRecording(false);
+//   };
+
+//   return (
+//     <button
+//       className={`voice-btn ${recording ? "recording" : ""}`}
+//       onClick={recording ? stopRecording : startRecording}
+//     >
+//       🎤
+//     </button>
+//   );
+// };
 // const ChatWindow = ({ onClose }) => {
 //   const [messages, setMessages] = useState([
 //     {
 //       sender: "bot",
-//       text: "السلام علیکم! آپ اپنا سوال اردو، انگریزی یا پنجابی میں پوچھ سکتے ہیں۔",
+//       text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں۔",
 //     },
 //   ]);
 
 //   const [input, setInput] = useState("");
-//   const [direction, setDirection] = useState("rtl");
 //   const [isTyping, setIsTyping] = useState(false);
 //   const messagesEndRef = useRef(null);
 
-//   // Scroll to bottom when messages update
 //   useEffect(() => {
 //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 //   }, [messages]);
 
-//   // Handle typing direction for input field
-//   const handleTypingDirection = (text) => {
-//     const urduRegex = /[\u0600-\u06FF]/;
-//     setDirection(urduRegex.test(text) ? "rtl" : "ltr");
-//   };
+//   /* 📩 Text Message */
+//   // const sendMessage = async () => {
+//   //   if (!input.trim()) return;
 
-//   // Detect language locally (optional, for your frontend logic)
-//   // const detectLanguage = (text) => {
-//   //   const urduRegex = /[\u0600-\u06FF]/;
-//   //   return urduRegex.test(text) ? "ur" : "en";
+//   //   const userMsg = input;
+//   //   setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
+//   //   setInput("");
+//   //   setIsTyping(true);
+
+//   //   const formData = new FormData();
+//   //   formData.append("message", userMsg);
+
+//   //   try {
+//   //     const res = await fetch("http://127.0.0.1:8000/api/chat/text", {
+//   //       method: "POST",
+//   //       body: formData,
+//   //     });
+
+//   //     const data = await res.json();
+
+//   //     setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+//   //   } catch {
+//   //     setMessages((prev) => [
+//   //       ...prev,
+//   //       { sender: "bot", text: "⚠️ سرور سے رابطہ نہیں ہو سکا۔" },
+//   //     ]);
+//   //   }
+
+//   //   setIsTyping(false);
 //   // };
+//   const sendMessage = async () => {
+//     if (!input.trim()) return;
 
-//   // ---- Send user message to backend ----
-//   const sendMessageToBackend = async (message) => {
-//     if (!message.trim()) return;
-
-//     // Add user's message to chat
-//     setMessages((prev) => [...prev, { sender: "user", text: message }]);
-//     handleTypingDirection(message);
+//     const userMsg = input;
+//     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
 //     setInput("");
 //     setIsTyping(true);
 
+//     const formData = new FormData();
+//     formData.append("message", userMsg);
+
 //     try {
-//       // Prepare form data for POST request
-//       const formData = new FormData();
-// formData.append("message", message);
-//       // const apiUrl = process.env.REACT_APP_API_URL;
-//       // Call your FastAPI backend
-//   const response = await fetch("http://127.0.0.1:8000/api/chat/text", {
-//   method: "POST",
-//   body: formData,
-// });
+//       const res = await fetch("http://127.0.0.1:8000/api/chat/text", {
+//         method: "POST",
+//         body: formData,
+//       });
 
+//       const data = await res.json();
 
-//       if (!response.ok) throw new Error("Backend API error");
+//       setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
-//       const data = await response.json();
-
-//       if (data.reply) {
-//         // Add backend's reply to chat
-//         setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
-//       } else {
-//         setMessages((prev) => [
-//           ...prev,
-//           { sender: "bot", text: "⚠️ کوئی جواب نہیں ملا۔" },
-//         ]);
+//       // 🔊 Play bot reply audio if available
+//       if (data.audio_url) {
+//         const audio = new Audio(`http://127.0.0.1:8000${data.audio_url}`);
+//         audio.play();
 //       }
-//     } catch (err) {
-//       console.error("Error sending message:", err);
+//     } catch {
 //       setMessages((prev) => [
 //         ...prev,
 //         { sender: "bot", text: "⚠️ سرور سے رابطہ نہیں ہو سکا۔" },
 //       ]);
-//     } finally {
-//       setIsTyping(false);
 //     }
-//   };
 
-//   // Triggered when user presses Enter or clicks Send
-//   const sendMessage = () => {
-//     if (!input.trim()) return;
-//     sendMessageToBackend(input);
+//     setIsTyping(false);
 //   };
+//   /* 🎙️ Voice Message */
+//   // const sendVoiceMessage = async (file) => {
+//   //   const audioURL = URL.createObjectURL(file);
 
+//   //   setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
+
+//   //   setIsTyping(true);
+
+//   //   const formData = new FormData();
+//   //   formData.append("file", file);
+
+//   //   try {
+//   //     const res = await fetch("http://127.0.0.1:8000/api/chat/voice", {
+//   //       method: "POST",
+//   //       body: formData,
+//   //     });
+
+//   //     const data = await res.json();
+
+//   //     setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+//   //   } catch {
+//   //     setMessages((prev) => [
+//   //       ...prev,
+//   //       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+//   //     ]);
+//   //   }
+
+//   //   setIsTyping(false);
+//   // };
+//   const sendVoiceMessage = async (file) => {
+//     const audioURL = URL.createObjectURL(file);
+//     setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
+//     setIsTyping(true);
+
+//     const formData = new FormData();
+//     formData.append("file", file);
+
+//     try {
+//       const res = await fetch("http://127.0.0.1:8000/api/chat/voice", {
+//         method: "POST",
+//         body: formData,
+//       });
+
+//       const data = await res.json();
+
+//       setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+
+//       // 🔊 Play TTS audio automatically
+//       if (data.audio_url) {
+//         const audio = new Audio(`http://127.0.0.1:8000${data.audio_url}`);
+//         audio.play();
+//       }
+//     } catch {
+//       setMessages((prev) => [
+//         ...prev,
+//         { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+//       ]);
+//     }
+
+//     setIsTyping(false);
+//   };
 //   return (
 //     <div className="chatbot-window">
 //       <div className="chatbot-header">
-//         <span>زرعی معلومات</span>
-//         <button onClick={onClose}>✖</button>
+//         <div className="chatbot-header-left">
+//           <div className="bot-avatar">🌾</div>
+//           <div>
+//             زرعی معلومات
+//             <div className="bot-status">online</div>
+//           </div>
+//         </div>
+
+//         <button className="chatbot-close-btn" onClick={onClose}>
+//           ✕
+//         </button>
 //       </div>
 
 //       <div className="chatbot-messages">
-//         {messages.map((msg, index) => (
-//           <MessageBubble key={index} sender={msg.sender} text={msg.text} />
+//         {messages.map((msg, i) => (
+//           <MessageBubble key={i} {...msg} />
 //         ))}
-//         {isTyping && <MessageBubble sender="bot" text="⏳ جواب آ رہا ہے..." />}
+
+//         {isTyping && (
+//           <div className="typing">
+//             <span></span>
+//             <span></span>
+//             <span></span>
+//           </div>
+//         )}
+
 //         <div ref={messagesEndRef} />
 //       </div>
 
 //       <div className="chatbot-input">
 //         <input
-//           type="text"
-//           placeholder="اپنا سوال یہاں لکھیں..."
 //           value={input}
-//           style={{ direction }}
-//           onChange={(e) => {
-//             setInput(e.target.value);
-//             handleTypingDirection(e.target.value);
-//           }}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="اپنا سوال لکھیں..."
 //           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
 //         />
-//         <button onClick={sendMessage}>بھیجیں</button>
+//         <button className="send-btn" onClick={sendMessage}>
+//           ➤
+//         </button>
+
+//         <VoiceRecorder onSend={sendVoiceMessage} />
 //       </div>
 //     </div>
 //   );
 // };
 
 // export default ChatWindow;
-
 import React, { useState, useRef, useEffect } from "react";
 import MessageBubble from "./MessageBubble";
 import "./chatbot.css";
 
-/* 🎙️ Voice Recorder */
 const VoiceRecorder = ({ onSend }) => {
   const [recording, setRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
+  const streamRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      streamRef.current?.getTracks().forEach((t) => t.stop());
+    };
+  }, []);
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    streamRef.current = stream;
 
     const recorder = new MediaRecorder(stream);
     mediaRecorderRef.current = recorder;
@@ -151,7 +324,9 @@ const VoiceRecorder = ({ onSend }) => {
   };
 
   const stopRecording = () => {
-    mediaRecorderRef.current.stop();
+    mediaRecorderRef.current?.stop();
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
     setRecording(false);
   };
 
@@ -169,22 +344,36 @@ const ChatWindow = ({ onClose }) => {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ .سکتے ہیں",
+      text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں۔",
     },
   ]);
-
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [currentAudio, setCurrentAudio] = useState(null);
+  const audioRef = useRef(null);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  /* 📩 Text Message */
+  const playAudio = (url) => {
+    // Stop previous audio if any
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    const audio = new Audio(`http://127.0.0.1:8000${url}`);
+    audioRef.current = audio;
+    setCurrentAudio(audio);
+    audio.play();
+
+    audio.onended = () => setCurrentAudio(null);
+  };
+
   const sendMessage = async () => {
     if (!input.trim()) return;
-
     const userMsg = input;
     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
     setInput("");
@@ -194,17 +383,17 @@ const ChatWindow = ({ onClose }) => {
     formData.append("message", userMsg);
 
     try {
-      const res = await fetch("https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/text", {
-        method: "POST",
-        body: formData,
-      });
-
+      const res = await fetch(
+        "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/text",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
       const data = await res.json();
+      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: data.reply },
-      ]);
+      if (data.audio_url) playAudio(data.audio_url);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -215,124 +404,141 @@ const ChatWindow = ({ onClose }) => {
     setIsTyping(false);
   };
 
-const sendVoiceMessage = async (file) => {
-  const audioURL = URL.createObjectURL(file);
+  const sendVoiceMessage = async (file) => {
+    const audioURL = URL.createObjectURL(file);
+    setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
+    setIsTyping(true);
 
-  setMessages((prev) => [
-    ...prev,
-    { sender: "user", audio: audioURL },
-  ]);
+    const formData = new FormData();
+    formData.append("file", file);
 
-  setIsTyping(true);
-
-  const formData = new FormData();
-  formData.append("file", file);
-
-  try {
-    const res = await fetch(
-      "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-      {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/chat/voice", {
         method: "POST",
         body: formData,
+      });
+      const data = await res.json();
+      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+
+      if (data.audio_url) playAudio(data.audio_url);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+      ]);
+    }
+
+    setIsTyping(false);
+  };
+
+  const sendVoiceMessage = async (file) => {
+    const audioURL = URL.createObjectURL(file);
+
+    setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
+
+    setIsTyping(true);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch(
+        "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      if (!res.ok) {
+        throw new Error("Voice API failed");
       }
-    );
 
-    if (!res.ok) {
-      throw new Error("Voice API failed");
+      const blob = await res.blob();
+
+      if (blob.size === 0) {
+        throw new Error("Empty audio received");
+      }
+
+      const botAudioURL = URL.createObjectURL(blob);
+
+      setMessages((prev) => [...prev, { sender: "bot", audio: botAudioURL }]);
+
+      // autoplay AFTER state update
+      setTimeout(() => {
+        const audio = new Audio(botAudioURL);
+        audio.play().catch(() => {});
+      }, 300);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+      ]);
     }
 
-    const blob = await res.blob();
-
-    if (blob.size === 0) {
-      throw new Error("Empty audio received");
-    }
-
-    const botAudioURL = URL.createObjectURL(blob);
-
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", audio: botAudioURL },
-    ]);
-
-    // autoplay AFTER state update
-    setTimeout(() => {
-      const audio = new Audio(botAudioURL);
-      audio.play().catch(() => {});
-    }, 300);
-
-  } catch (err) {
-    console.error(err);
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
-    ]);
-  }
-
-  setIsTyping(false);
-};
+    setIsTyping(false);
+  };
 
   /* 🎙️ Voice Message */
-//   const sendVoiceMessage = async (file) => {
-//   const audioURL = URL.createObjectURL(file);
+  //   const sendVoiceMessage = async (file) => {
+  //   const audioURL = URL.createObjectURL(file);
 
-//   setMessages((prev) => [
-//     ...prev,
-//     { sender: "user", audio: audioURL },
-//   ]);
+  //   setMessages((prev) => [
+  //     ...prev,
+  //     { sender: "user", audio: audioURL },
+  //   ]);
 
-//   setIsTyping(true);
+  //   setIsTyping(true);
 
-//   const formData = new FormData();
-//   formData.append("file", file);
+  //   const formData = new FormData();
+  //   formData.append("file", file);
 
-//   try {
-//     const res = await fetch(
-//       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
+  //   try {
+  //     const res = await fetch(
+  //       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+  //       {
+  //         method: "POST",
+  //         body: formData,
+  //       }
+  //     );
 
-//     const blob = await res.blob();   // ✅ get audio
-//     const botAudioURL = URL.createObjectURL(blob);
+  //     const blob = await res.blob();   // ✅ get audio
+  //     const botAudioURL = URL.createObjectURL(blob);
 
-//     setMessages((prev) => [
-//       ...prev,
-//       { sender: "bot", audio: botAudioURL },
-//     ]);
+  //     setMessages((prev) => [
+  //       ...prev,
+  //       { sender: "bot", audio: botAudioURL },
+  //     ]);
 
-//     // 🔊 auto play
-//     const audio = new Audio(botAudioURL);
-//     audio.play();
+  //     // 🔊 auto play
+  //     const audio = new Audio(botAudioURL);
+  //     audio.play();
 
-//   } catch {
-//     setMessages((prev) => [
-//       ...prev,
-//       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
-//     ]);
-//   }
+  //   } catch {
+  //     setMessages((prev) => [
+  //       ...prev,
+  //       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+  //     ]);
+  //   }
 
-//   setIsTyping(false);
-// };
+  //   setIsTyping(false);
+  // };
 
   return (
     <div className="chatbot-window">
-
       <div className="chatbot-header">
-  <div className="chatbot-header-left">
-    <div className="bot-avatar">🌾</div>
-    <div>
-      زرعی معلومات
-      <div className="bot-status">online</div>
-    </div>
-  </div>
-
-  <button className="chatbot-close-btn" onClick={onClose}>
-  ✕
-</button>
-
-</div>
+        <div className="chatbot-header-left">
+          <div className="bot-avatar">🌾</div>
+          <div>
+            زرعی معلومات
+            <div className="bot-status">online</div>
+          </div>
+        </div>
+        <button className="chatbot-close-btn" onClick={onClose}>
+          ✕
+        </button>
+      </div>
 
       <div className="chatbot-messages">
         {messages.map((msg, i) => (
@@ -341,12 +547,37 @@ const sendVoiceMessage = async (file) => {
 
         {isTyping && (
           <div className="typing">
-            <span></span><span></span><span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
+
+      {/* Audio controls only visible when bot audio is playing */}
+      {currentAudio && (
+        <div className="audio-controls">
+          <button
+            onClick={() => {
+              currentAudio.pause();
+              currentAudio.currentTime = 0;
+              setCurrentAudio(null);
+            }}
+          >
+            ⏹ Stop
+          </button>
+          <button
+            onClick={() => {
+              if (currentAudio.paused) currentAudio.play();
+              else currentAudio.pause();
+            }}
+          >
+            ⏯ {currentAudio.paused ? "Play" : "Pause"}
+          </button>
+        </div>
+      )}
 
       <div className="chatbot-input">
         <input
@@ -355,13 +586,12 @@ const sendVoiceMessage = async (file) => {
           placeholder="اپنا سوال لکھیں..."
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
-        <button className="send-btn" onClick={sendMessage}>➤</button>
-
+        <button className="send-btn" onClick={sendMessage}>
+          ➤
+        </button>
         <VoiceRecorder onSend={sendVoiceMessage} />
       </div>
     </div>
-
-    
   );
 };
 
