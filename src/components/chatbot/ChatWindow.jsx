@@ -344,7 +344,7 @@ const ChatWindow = ({ onClose }) => {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں۔",
+      text: "السلام علیکم۔! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں",
     },
   ]);
   const [input, setInput] = useState("");
