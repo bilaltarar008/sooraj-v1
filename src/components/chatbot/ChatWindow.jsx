@@ -215,8 +215,7 @@ const ChatWindow = ({ onClose }) => {
     setIsTyping(false);
   };
 
-  /* 🎙️ Voice Message */
-  const sendVoiceMessage = async (file) => {
+const sendVoiceMessage = async (file) => {
   const audioURL = URL.createObjectURL(file);
 
   setMessages((prev) => [
@@ -238,7 +237,16 @@ const ChatWindow = ({ onClose }) => {
       }
     );
 
-    const blob = await res.blob();   // ✅ get audio
+    if (!res.ok) {
+      throw new Error("Voice API failed");
+    }
+
+    const blob = await res.blob();
+
+    if (blob.size === 0) {
+      throw new Error("Empty audio received");
+    }
+
     const botAudioURL = URL.createObjectURL(blob);
 
     setMessages((prev) => [
@@ -246,11 +254,14 @@ const ChatWindow = ({ onClose }) => {
       { sender: "bot", audio: botAudioURL },
     ]);
 
-    // 🔊 auto play
-    const audio = new Audio(botAudioURL);
-    audio.play();
+    // autoplay AFTER state update
+    setTimeout(() => {
+      const audio = new Audio(botAudioURL);
+      audio.play().catch(() => {});
+    }, 300);
 
-  } catch {
+  } catch (err) {
+    console.error(err);
     setMessages((prev) => [
       ...prev,
       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
@@ -259,6 +270,51 @@ const ChatWindow = ({ onClose }) => {
 
   setIsTyping(false);
 };
+
+  /* 🎙️ Voice Message */
+//   const sendVoiceMessage = async (file) => {
+//   const audioURL = URL.createObjectURL(file);
+
+//   setMessages((prev) => [
+//     ...prev,
+//     { sender: "user", audio: audioURL },
+//   ]);
+
+//   setIsTyping(true);
+
+//   const formData = new FormData();
+//   formData.append("file", file);
+
+//   try {
+//     const res = await fetch(
+//       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+//       {
+//         method: "POST",
+//         body: formData,
+//       }
+//     );
+
+//     const blob = await res.blob();   // ✅ get audio
+//     const botAudioURL = URL.createObjectURL(blob);
+
+//     setMessages((prev) => [
+//       ...prev,
+//       { sender: "bot", audio: botAudioURL },
+//     ]);
+
+//     // 🔊 auto play
+//     const audio = new Audio(botAudioURL);
+//     audio.play();
+
+//   } catch {
+//     setMessages((prev) => [
+//       ...prev,
+//       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+//     ]);
+//   }
+
+//   setIsTyping(false);
+// };
 
   return (
     <div className="chatbot-window">
