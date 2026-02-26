@@ -3,10 +3,7 @@ import ChatWindow from "./ChatWindow";
 import "./chatbot.css";
 
 const ChatWidget = () => {
-  // Chat opens on first load
   const [isOpen, setIsOpen] = useState(true);
-
-  // Track if user manually closed it
   const [wasClosed, setWasClosed] = useState(false);
 
   useEffect(() => {
@@ -20,15 +17,16 @@ const ChatWidget = () => {
 
   const handleOpen = () => {
     setIsOpen(true);
-    setWasClosed(false);
   };
 
   return (
     <>
+      {/* 💬 CHAT WINDOW */}
       {isOpen && <ChatWindow onClose={handleClose} />}
 
+      {/* 💬 FLOATING LAUNCHER */}
       {!isOpen && wasClosed && (
-        <button className="chatbot-button" onClick={handleOpen}>
+        <button className="chatbot-launcher" onClick={handleOpen}>
           💬
         </button>
       )}
