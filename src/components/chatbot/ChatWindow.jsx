@@ -289,6 +289,9 @@ import React, { useState, useRef, useEffect } from "react";
 import MessageBubble from "./MessageBubble";
 import "./chatbot.css";
 
+const BACKEND = "https://sooraj-ai-598501827987.asia-south1.run.app";
+
+/* 🎙️ Voice Recorder */
 const VoiceRecorder = ({ onSend }) => {
   const [recording, setRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
@@ -314,8 +317,18 @@ const VoiceRecorder = ({ onSend }) => {
     };
 
     recorder.onstop = () => {
-      const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-      const file = new File([blob], "voice.webm");
+      const mimeType = MediaRecorder.isTypeSupported("audio/mp4")
+        ? "audio/mp4"
+        : "audio/webm";
+
+      const blob = new Blob(chunksRef.current, { type: mimeType });
+
+      const file = new File(
+        [blob],
+        `voice.${mimeType.includes("mp4") ? "mp4" : "webm"}`,
+        { type: mimeType }
+      );
+
       onSend(file);
     };
 
@@ -325,8 +338,7 @@ const VoiceRecorder = ({ onSend }) => {
 
   const stopRecording = () => {
     mediaRecorderRef.current?.stop();
-    streamRef.current?.getTracks().forEach((track) => track.stop());
-    streamRef.current = null;
+    streamRef.current?.getTracks().forEach((t) => t.stop());
     setRecording(false);
   };
 
@@ -344,7 +356,7 @@ const ChatWindow = ({ onClose }) => {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "السلام علیکم۔! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں",
+      text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں",
     },
   ]);
   const [input, setInput] = useState("");
@@ -358,22 +370,20 @@ const ChatWindow = ({ onClose }) => {
   }, [messages]);
 
   const playAudio = (url) => {
-    // Stop previous audio if any
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
 
-    // const audio = new Audio(`http://127.0.0.1:8000${url}`);
-    const BACKEND = "https://sooraj-ai-598501827987.asia-south1.run.app";
-    const audio = new Audio(`${BACKEND}${url}`);
+    const audio = new Audio(url);
     audioRef.current = audio;
     setCurrentAudio(audio);
-    audio.play();
 
+    audio.play().catch(() => {});
     audio.onended = () => setCurrentAudio(null);
   };
 
+  /* 📩 TEXT MESSAGE */
   const sendMessage = async () => {
     if (!input.trim()) return;
     const userMsg = input;
@@ -385,17 +395,15 @@ const ChatWindow = ({ onClose }) => {
     formData.append("message", userMsg);
 
     try {
-      const res = await fetch(
-        "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/text",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
+      const res = await fetch(`${BACKEND}/api/chat/text`, {
+        method: "POST",
+        body: formData,
+      });
+
       const data = await res.json();
       setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
-      if (data.audio_url) playAudio(data.audio_url);
+      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -406,95 +414,53 @@ const ChatWindow = ({ onClose }) => {
     setIsTyping(false);
   };
 
+  /* 🎙️ VOICE MESSAGE */
   const sendVoiceMessage = async (file) => {
     const audioURL = URL.createObjectURL(file);
+
     setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
     setIsTyping(true);
 
-  setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
-  setIsTyping(true);
+    const formData = new FormData();
+    formData.append("file", file);
 
-  const formData = new FormData();
-  formData.append("file", file);
+    try {
+      const res = await fetch(`${BACKEND}/api/chat/voice`, {
+        method: "POST",
+        body: formData,
+      });
 
-  try {
-    const res = await fetch(
-      "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-      { method: "POST", body: formData }
-    );
+      const data = await res.json();
 
-    const data = await res.json();
+      if (data.audio_url) {
+        const fullUrl = BACKEND + data.audio_url;
 
-    setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            sender: "bot",
+            text: data.reply,
+            audio: fullUrl,
+          },
+        ]);
 
-    if (data.audio_url) {
-      const fullUrl =
-        "https://sooraj-ai-598501827987.asia-south1.run.app" +
-        data.audio_url;
-
+        playAudio(fullUrl);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: data.reply },
+        ]);
+      }
+    } catch (e) {
+      console.error(e);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", audio: fullUrl },
+        { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
       ]);
-
-      new Audio(fullUrl).play().catch(() => {});
     }
 
-  } catch (e) {
-    console.error(e);
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
-    ]);
-  }
-
-  setIsTyping(false);
-};
-
-  /* 🎙️ Voice Message */
-//   const sendVoiceMessage = async (file) => {
-//   const audioURL = URL.createObjectURL(file);
-
-//   setMessages((prev) => [
-//     ...prev,
-//     { sender: "user", audio: audioURL },
-//   ]);
-
-//   setIsTyping(true);
-
-//   const formData = new FormData();
-//   formData.append("file", file);
-
-//   try {
-//     const res = await fetch(
-//       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-//       {
-//         method: "POST",
-//         body: formData,
-//       }
-//     );
-
-//     const blob = await res.blob();   // ✅ get audio
-//     const botAudioURL = URL.createObjectURL(blob);
-
-//     setMessages((prev) => [
-//       ...prev,
-//       { sender: "bot", audio: botAudioURL },
-//     ]);
-
-//     // 🔊 auto play
-//     const audio = new Audio(botAudioURL);
-//     audio.play();
-
-//   } catch {
-//     setMessages((prev) => [
-//       ...prev,
-//       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
-//     ]);
-//   }
-
-//   setIsTyping(false);
-// };
+    setIsTyping(false);
+  };
 
   return (
     <div className="chatbot-window">
@@ -527,25 +493,26 @@ const ChatWindow = ({ onClose }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Audio controls only visible when bot audio is playing */}
+      {/* 🎧 GLOBAL AUDIO CONTROLS */}
       {currentAudio && (
         <div className="audio-controls">
           <button
             onClick={() => {
-              currentAudio.pause();
-              currentAudio.currentTime = 0;
+              audioRef.current.pause();
+              audioRef.current.currentTime = 0;
               setCurrentAudio(null);
             }}
           >
             ⏹ Stop
           </button>
+
           <button
             onClick={() => {
-              if (currentAudio.paused) currentAudio.play();
-              else currentAudio.pause();
+              if (audioRef.current.paused) audioRef.current.play();
+              else audioRef.current.pause();
             }}
           >
-            ⏯ {currentAudio.paused ? "Play" : "Pause"}
+            ⏯ Play / Pause
           </button>
         </div>
       )}
@@ -557,9 +524,11 @@ const ChatWindow = ({ onClose }) => {
           placeholder="اپنا سوال لکھیں..."
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
+
         <button className="send-btn" onClick={sendMessage}>
           ➤
         </button>
+
         <VoiceRecorder onSend={sendVoiceMessage} />
       </div>
     </div>
