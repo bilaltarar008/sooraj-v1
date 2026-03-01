@@ -411,30 +411,90 @@ const ChatWindow = ({ onClose }) => {
     setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
     setIsTyping(true);
 
-    const formData = new FormData();
-    formData.append("file", file);
+  setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
+  setIsTyping(true);
 
-    try {
-      const res = await fetch(
-        "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-      const data = await res.json();
-      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+  const formData = new FormData();
+  formData.append("file", file);
 
-      if (data.audio_url) playAudio(data.audio_url);
-    } catch {
+  try {
+    const res = await fetch(
+      "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+      { method: "POST", body: formData }
+    );
+
+    const data = await res.json();
+
+    setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+
+    if (data.audio_url) {
+      const fullUrl =
+        "https://sooraj-ai-598501827987.asia-south1.run.app" +
+        data.audio_url;
+
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+        { sender: "bot", audio: fullUrl },
       ]);
+
+      new Audio(fullUrl).play().catch(() => {});
     }
 
-    setIsTyping(false);
-  };
+  } catch (e) {
+    console.error(e);
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+    ]);
+  }
+
+  setIsTyping(false);
+};
+
+  /* 🎙️ Voice Message */
+//   const sendVoiceMessage = async (file) => {
+//   const audioURL = URL.createObjectURL(file);
+
+//   setMessages((prev) => [
+//     ...prev,
+//     { sender: "user", audio: audioURL },
+//   ]);
+
+//   setIsTyping(true);
+
+//   const formData = new FormData();
+//   formData.append("file", file);
+
+//   try {
+//     const res = await fetch(
+//       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
+//       {
+//         method: "POST",
+//         body: formData,
+//       }
+//     );
+
+//     const blob = await res.blob();   // ✅ get audio
+//     const botAudioURL = URL.createObjectURL(blob);
+
+//     setMessages((prev) => [
+//       ...prev,
+//       { sender: "bot", audio: botAudioURL },
+//     ]);
+
+//     // 🔊 auto play
+//     const audio = new Audio(botAudioURL);
+//     audio.play();
+
+//   } catch {
+//     setMessages((prev) => [
+//       ...prev,
+//       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
+//     ]);
+//   }
+
+//   setIsTyping(false);
+// };
 
   return (
     <div className="chatbot-window">
