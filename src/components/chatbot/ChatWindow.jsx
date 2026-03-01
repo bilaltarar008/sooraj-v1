@@ -362,6 +362,7 @@ const ChatWindow = ({ onClose }) => {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [currentAudio, setCurrentAudio] = useState(null);
+
   const audioRef = useRef(null);
   const messagesEndRef = useRef(null);
 
@@ -387,6 +388,7 @@ const ChatWindow = ({ onClose }) => {
   const sendMessage = async () => {
     if (!input.trim()) return;
     const userMsg = input;
+
     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
     setInput("");
     setIsTyping(true);
@@ -403,7 +405,10 @@ const ChatWindow = ({ onClose }) => {
       const data = await res.json();
       setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
-      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: data.reply },
+      ]);
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -418,6 +423,7 @@ const ChatWindow = ({ onClose }) => {
   const sendVoiceMessage = async (file) => {
     const audioURL = URL.createObjectURL(file);
 
+    // show user voice
     setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
     setIsTyping(true);
 
@@ -451,8 +457,9 @@ const ChatWindow = ({ onClose }) => {
           { sender: "bot", text: data.reply },
         ]);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
+
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
