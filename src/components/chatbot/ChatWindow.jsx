@@ -237,28 +237,25 @@ const sendVoiceMessage = async (file) => {
       }
     );
 
-    if (!res.ok) {
-      throw new Error("Voice API failed");
-    }
-
-    const blob = await res.blob();
-
-    if (blob.size === 0) {
-      throw new Error("Empty audio received");
-    }
-
-    const botAudioURL = URL.createObjectURL(blob);
+    const data = await res.json();
 
     setMessages((prev) => [
       ...prev,
-      { sender: "bot", audio: botAudioURL },
+      { sender: "bot", text: data.reply },
     ]);
 
-    // autoplay AFTER state update
-    setTimeout(() => {
-      const audio = new Audio(botAudioURL);
-      audio.play().catch(() => {});
-    }, 300);
+    if (data.audio_url) {
+      const fullAudioUrl =
+        "https://sooraj-ai-598501827987.asia-south1.run.app" +
+        data.audio_url;
+
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", audio: fullAudioUrl },
+      ]);
+
+      new Audio(fullAudioUrl).play().catch(() => {});
+    }
 
   } catch (err) {
     console.error(err);
