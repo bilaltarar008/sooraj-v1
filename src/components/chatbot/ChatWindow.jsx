@@ -218,11 +218,7 @@ const ChatWindow = ({ onClose }) => {
 const sendVoiceMessage = async (file) => {
   const audioURL = URL.createObjectURL(file);
 
-  setMessages((prev) => [
-    ...prev,
-    { sender: "user", audio: audioURL },
-  ]);
-
+  setMessages((prev) => [...prev, { sender: "user", audio: audioURL }]);
   setIsTyping(true);
 
   const formData = new FormData();
@@ -231,34 +227,28 @@ const sendVoiceMessage = async (file) => {
   try {
     const res = await fetch(
       "https://sooraj-ai-598501827987.asia-south1.run.app/api/chat/voice",
-      {
-        method: "POST",
-        body: formData,
-      }
+      { method: "POST", body: formData }
     );
 
     const data = await res.json();
 
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", text: data.reply },
-    ]);
+    setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
     if (data.audio_url) {
-      const fullAudioUrl =
+      const fullUrl =
         "https://sooraj-ai-598501827987.asia-south1.run.app" +
         data.audio_url;
 
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", audio: fullAudioUrl },
+        { sender: "bot", audio: fullUrl },
       ]);
 
-      new Audio(fullAudioUrl).play().catch(() => {});
+      new Audio(fullUrl).play().catch(() => {});
     }
 
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+    console.error(e);
     setMessages((prev) => [
       ...prev,
       { sender: "bot", text: "⚠️ وائس پراسیس نہیں ہو سکی" },
