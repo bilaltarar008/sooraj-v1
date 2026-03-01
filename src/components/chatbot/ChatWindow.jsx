@@ -359,6 +359,7 @@ const ChatWindow = ({ onClose }) => {
       text: "السلام علیکم! آپ اردو، پنجابی یا انگریزی میں سوال پوچھ سکتے ہیں",
     },
   ]);
+
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -387,6 +388,7 @@ const ChatWindow = ({ onClose }) => {
   /* 📩 TEXT MESSAGE */
   const sendMessage = async () => {
     if (!input.trim()) return;
+
     const userMsg = input;
 
     setMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
@@ -403,7 +405,6 @@ const ChatWindow = ({ onClose }) => {
       });
 
       const data = await res.json();
-      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
 
       setMessages((prev) => [
         ...prev,
@@ -479,6 +480,7 @@ const ChatWindow = ({ onClose }) => {
             <div className="bot-status">online</div>
           </div>
         </div>
+
         <button className="chatbot-close-btn" onClick={onClose}>
           ✕
         </button>
