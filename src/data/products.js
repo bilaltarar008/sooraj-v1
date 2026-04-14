@@ -844,6 +844,294 @@ const products = [
       ],
     },
   },
+  {
+  id: 21,
+  name: {
+    en: "Monomehype",
+    ur: "مونو مہائپ",
+  },
+  chemical: {
+    en: "Monomehyp 0.5% G",
+    ur: "مونو مہائپ 0.5٪ جی",
+  },
+  category: { en: "Insecticide", ur: "کیڑے مار" },
+  packSize: { en: "1 KG", ur: "1 کلو" },
+  image: require("../assets/products/Monomehype.png"),
+  composition: [
+    {
+      en: "Monomehyp 0.5% Granules",
+      ur: "مونو مہائپ 0.5٪ دانے دار",
+    },
+  ],
+  crops: {
+    en: "Rice, Vegetables",
+    ur: "چاول، سبزیاں",
+  },
+  usage: {
+    en: [
+      "Apply granules directly to soil or standing water.",
+      "Ensure even distribution across the field.",
+      "Use recommended dose as per crop requirement.",
+    ],
+    ur: [
+      "دانے براہ راست مٹی یا کھڑے پانی میں ڈالیں۔",
+      "کھیت میں یکساں طور پر پھیلائیں۔",
+      "فصل کے مطابق تجویز کردہ مقدار استعمال کریں۔",
+    ],
+  },
+  season: {
+    en: "Kharif season",
+    ur: "خریف کا موسم",
+  },
+  problems: {
+    en: "Stem borers, leaf folders, and soil pests",
+    ur: "تنے کے کیڑے، پتے موڑنے والے کیڑے اور مٹی کے کیڑے",
+  },
+  details: {
+    en: [
+      "Granular insecticide for effective pest control.",
+      "Provides long-lasting protection to crops.",
+      "Easy to apply with uniform distribution.",
+    ],
+    ur: [
+      "دانے دار کیڑے مار دوا جو مؤثر کنٹرول فراہم کرتی ہے۔",
+      "فصل کو طویل عرصے تک تحفظ فراہم کرتی ہے۔",
+      "آسان استعمال اور یکساں پھیلاؤ۔",
+    ],
+  },
+},
+
+{
+  id: 22,
+  name: {
+    en: "TEMU 27% (Imported)",
+    ur: "ٹیمو 27٪ (امپورٹڈ)",
+  },
+  chemical: {
+    en: "Zinc 27%",
+    ur: "زنک 27٪",
+  },
+  category: { en: "Micronutrient", ur: "خرد غذائی اجزاء" },
+  packSize: { en: "1 KG", ur: "1 کلو" },
+  image: require("../assets/products/TEMU.png"),
+  composition: [
+    {
+      en: "Zinc 27%",
+      ur: "زنک 27٪",
+    },
+  ],
+  crops: {
+    en: "Wheat, Rice, Maize, Vegetables",
+    ur: "گندم، چاول، مکئی، سبزیاں",
+  },
+  usage: {
+    en: [
+      "Mix recommended quantity with soil or water.",
+      "Apply during early growth stages of crops.",
+      "Repeat if deficiency symptoms persist.",
+    ],
+    ur: [
+      "تجویز کردہ مقدار مٹی یا پانی کے ساتھ استعمال کریں۔",
+      "فصل کی ابتدائی بڑھوتری کے دوران استعمال کریں۔",
+      "اگر کمی برقرار رہے تو دوبارہ استعمال کریں۔",
+    ],
+  },
+  season: {
+    en: "All growing seasons",
+    ur: "تمام بڑھتی ہوئی موسموں میں",
+  },
+  problems: {
+    en: "Zinc deficiency, stunted growth, yellowing of leaves",
+    ur: "زنک کی کمی، کمزور بڑھوتری، پتوں کا پیلا ہونا",
+  },
+  details: {
+    en: [
+      "Essential micronutrient for plant growth and development.",
+      "Improves crop yield and quality.",
+      "Enhances resistance against environmental stress.",
+    ],
+    ur: [
+      "پودوں کی بڑھوتری کے لیے ضروری خرد غذائی جزو۔",
+      "پیداوار اور معیار کو بہتر بناتا ہے۔",
+      "ماحولیاتی دباؤ کے خلاف مزاحمت بڑھاتا ہے۔",
+    ],
+  },
+},
+
+{
+  id: 23,
+  name: {
+    en: "VISA 45% WG",
+    ur: "ویزا 45٪ ڈبلیو جی",
+  },
+  chemical: {
+    en: "Lufenuron 40% + Emamectin 5% WG",
+    ur: "لوفینورون 40٪ + ایمامیکٹن 5٪ ڈبلیو جی",
+  },
+  category: { en: "Insecticide", ur: "کیڑے مار" },
+  packSize: { en: "100 GM", ur: "100 گرام" },
+  image: require("../assets/products/VISA.jpeg"),
+  composition: [
+    {
+      en: "Lufenuron 40%",
+      ur: "لوفینورون 40٪",
+    },
+    {
+      en: "Emamectin 5%",
+      ur: "ایمامیکٹن 5٪",
+    },
+  ],
+  crops: {
+    en: "Cotton, Vegetables, Maize",
+    ur: "کپاس، سبزیاں، مکئی",
+  },
+  usage: {
+    en: [
+      "Mix recommended dose with water.",
+      "Spray evenly on crop foliage.",
+      "Apply at early stage of pest attack.",
+    ],
+    ur: [
+      "تجویز کردہ مقدار پانی میں مکس کریں۔",
+      "فصل کے پتوں پر یکساں سپرے کریں۔",
+      "کیڑوں کے ابتدائی حملے پر استعمال کریں۔",
+    ],
+  },
+  season: {
+    en: "Spring and Summer",
+    ur: "بہار اور گرمیوں میں",
+  },
+  problems: {
+    en: "Lepidopteran pests, bollworms, caterpillars",
+    ur: "سنڈی نما کیڑے، بال ورمز، سنڈیاں",
+  },
+  details: {
+    en: [
+      "Dual-action insecticide with contact and stomach activity.",
+      "Effective against resistant pest populations.",
+      "Provides long-lasting crop protection.",
+    ],
+    ur: [
+      "دوہری اثر والی کیڑے مار دوا جو چھونے اور کھانے دونوں سے اثر کرتی ہے۔",
+      "مزاحم کیڑوں کے خلاف مؤثر۔",
+      "فصل کو طویل عرصے تک تحفظ فراہم کرتی ہے۔",
+    ],
+  },
+}, 
+
+{
+  id: 24,
+  name: {
+    en: "Pendimethalin 33% EC",
+    ur: "پینڈیمتھالین 33٪ ای سی",
+  },
+  chemical: {
+    en: "Pendimethalin 33% EC",
+    ur: "پینڈیمتھالین 33٪ ای سی",
+  },
+  category: { en: "Herbicide", ur: "جڑی بوٹی مار" },
+  packSize: { en: "1 LTR", ur: "1 لیٹر" },
+  image: require("../assets/products/Pendimethalin.png"),
+  composition: [
+    {
+      en: "Pendimethalin 33% EC",
+      ur: "پینڈیمتھالین 33٪ ای سی",
+    },
+  ],
+  crops: {
+    en: "Cotton, Wheat, Rice, Vegetables",
+    ur: "کپاس، گندم، چاول، سبزیاں",
+  },
+  usage: {
+    en: [
+      "Apply before weed emergence (pre-emergence).",
+      "Mix recommended dose with water.",
+      "Spray uniformly on soil surface after sowing.",
+    ],
+    ur: [
+      "جڑی بوٹیوں کے اگنے سے پہلے استعمال کریں۔",
+      "تجویز کردہ مقدار پانی میں مکس کریں۔",
+      "بوائی کے بعد مٹی کی سطح پر یکساں سپرے کریں۔",
+    ],
+  },
+  season: {
+    en: "Rabi and Kharif seasons",
+    ur: "ربیع اور خریف کے موسم",
+  },
+  problems: {
+    en: "Annual grasses and broadleaf weeds",
+    ur: "سالانہ گھاس اور چوڑی پتی والی جڑی بوٹیاں",
+  },
+  details: {
+    en: [
+      "Pre-emergence herbicide for effective weed control.",
+      "Prevents weed germination and early growth.",
+      "Improves crop yield by reducing weed competition.",
+    ],
+    ur: [
+      "ابتدائی مرحلے میں جڑی بوٹیوں کے خاتمے کے لیے مؤثر دوا۔",
+      "جڑی بوٹیوں کے اگنے اور بڑھنے کو روکتی ہے۔",
+      "فصل کی پیداوار کو بہتر بناتی ہے۔",
+    ],
+  },
+},
+
+{
+  id: 25,
+  name: {
+    en: "Gengwei 55% SC",
+    ur: "جینگ وے 55٪ ایس سی",
+  },
+  chemical: {
+    en: "Gengwei 55% SC",
+    ur: "جینگ وے 55٪ ایس سی",
+  },
+  category: { en: "Herbicide", ur: "جڑی بوٹی مار" },
+  packSize: { en: "1 LTR", ur: "1 لیٹر" },
+  image: require("../assets/products/Gengwei.png"),
+  composition: [
+    {
+      en: "Gengwei 55% SC",
+      ur: "جینگ وے 55٪ ایس سی",
+    },
+  ],
+  crops: {
+    en: "Rice, Wheat",
+    ur: "چاول، گندم",
+  },
+  usage: {
+    en: [
+      "Mix recommended dose with water.",
+      "Apply evenly on field after weed emergence.",
+      "Ensure proper soil moisture for best results.",
+    ],
+    ur: [
+      "تجویز کردہ مقدار پانی میں مکس کریں۔",
+      "جڑی بوٹیوں کے اگنے کے بعد کھیت میں یکساں سپرے کریں۔",
+      "بہترین نتائج کے لیے مٹی میں نمی برقرار رکھیں۔",
+    ],
+  },
+  season: {
+    en: "Rabi and Kharif seasons",
+    ur: "ربیع اور خریف کے موسم",
+  },
+  problems: {
+    en: "Grassy weeds and broadleaf weeds",
+    ur: "گھاس نما اور چوڑی پتی والی جڑی بوٹیاں",
+  },
+  details: {
+    en: [
+      "Selective herbicide for effective weed control.",
+      "Controls a wide range of weeds.",
+      "Enhances crop growth by reducing competition.",
+    ],
+    ur: [
+      "منتخب جڑی بوٹی مار دوا جو مؤثر کنٹرول فراہم کرتی ہے۔",
+      "مختلف اقسام کی جڑی بوٹیوں کے خلاف مؤثر۔",
+      "فصل کی بہتر بڑھوتری میں مدد دیتی ہے۔",
+    ],
+  },
+}
 ];
 
 export default products;
